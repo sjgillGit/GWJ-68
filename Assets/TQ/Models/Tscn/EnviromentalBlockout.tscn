@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://bi6ccu8ij0ywn"]
+
+[ext_resource type="PackedScene" uid="uid://da8yscxj8h2qi" path="res://Assets/TQ/Models/Blend/BlockoutKitbash.blend" id="1_6g5gn"]
+[ext_resource type="Texture2D" uid="uid://dtnqnaierwdv3" path="res://Assets/TQ/textures/Planks033B_2K-PNG/Planks033B_2K-PNG_Displacement.png" id="2_osyms"]
+[ext_resource type="Texture2D" uid="uid://bwrsiwrkxktpv" path="res://Assets/TQ/textures/Planks033B_2K-PNG/Planks033B_2K-PNG_NormalGL.png" id="3_oy7l8"]
+[ext_resource type="Texture2D" uid="uid://bk86iv1wvmev6" path="res://Assets/TQ/textures/Planks033B_2K-PNG/Planks033B_2K-PNG_Roughness.png" id="4_vj8tc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6fiw3"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_color = Color(0.165625, 0.557737, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24ghy"]
+resource_name = "Material.002"
+cull_mode = 2
+albedo_color = Color(0.906332, 0, 0.0173072, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0lsop"]
+_surfaces = [{
+"aabb": AABB(-1, -0.928464, -2.33333, 2, 1.00136e-05, 2.33334),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray(4, 0, 3, 0, 5, 0, 4, 0, 2, 0, 3, 0, 0, 0, 7, 0, 1, 0, 0, 0, 6, 0, 7, 0),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 146, 0, 0, 255, 255, 0, 0, 72, 146, 0, 0, 0, 0, 0, 0, 35, 201, 0, 0, 255, 255, 0, 0, 35, 201, 0, 0)
+}, {
+"aabb": AABB(-1, -0.928464, -1, 2, 1.00136e-05, 0.5),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(2, 0, 1, 0, 3, 0, 2, 0, 0, 0, 1, 0),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_r4uo0"]
+resource_name = "BlockoutKitbash_Plane_001"
+_surfaces = [{
+"aabb": AABB(-1, -0.928464, -2.33333, 2, 1.00136e-05, 2.33334),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 255, 127, 255, 255, 255, 127, 0, 0, 255, 191, 255, 255, 255, 191),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray(4, 0, 3, 0, 5, 0, 4, 0, 2, 0, 3, 0, 0, 0, 7, 0, 1, 0, 0, 0, 6, 0, 7, 0),
+"material": SubResource("StandardMaterial3D_6fiw3"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 191, 255, 255, 0, 0, 254, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 0, 0, 0, 0, 72, 146, 255, 191, 255, 255, 0, 0, 72, 146, 255, 191, 0, 0, 0, 0, 35, 201, 255, 191, 255, 255, 0, 0, 35, 201, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}, {
+"aabb": AABB(-1, -0.928464, -1, 2, 1.00136e-05, 0.5),
+"attribute_data": PackedByteArray(0, 0, 255, 127, 255, 255, 255, 127, 0, 0, 255, 191, 255, 255, 255, 191),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(2, 0, 1, 0, 3, 0, 2, 0, 0, 0, 1, 0),
+"material": SubResource("StandardMaterial3D_24ghy"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_0lsop")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3rwf"]
+albedo_color = Color(0.827451, 0.607843, 0.458824, 1)
+roughness_texture = ExtResource("4_vj8tc")
+normal_enabled = true
+normal_texture = ExtResource("3_oy7l8")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_osyms")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7ju7e"]
+data = PackedVector3Array(-1, -0.928464, -1, 1, -0.928464, -2.33333, 1, -0.928464, -1, -1, -0.928464, -1, -1, -0.928464, -2.33333, 1, -0.928464, -2.33333, -1, -0.928464, 0, 1, -0.928464, -0.5, 1, -0.928464, 0, -1, -0.928464, 0, -1, -0.928464, -0.5, 1, -0.928464, -0.5, -1, -0.928464, -0.5, 1, -0.928464, -1, 1, -0.928464, -0.5, -1, -0.928464, -0.5, -1, -0.928464, -1, 1, -0.928464, -1)
+
+[node name="BlockoutKitbash" instance=ExtResource("1_6g5gn")]
+
+[node name="Wall" parent="." index="1"]
+transform = Transform3D(0, 1.5, 0, 0, 0, -1.5, -1.5, 0, 0, -2.6032, 0, -4.18724)
+
+[node name="Wall3" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(0, 1.5, 0, 0, 0, -1.5, -1.5, 0, 0, -1.35368, 0, -8.09321)
+mesh = SubResource("ArrayMesh_r4uo0")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_d3rwf")
+surface_material_override/1 = SubResource("StandardMaterial3D_d3rwf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall3" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_7ju7e")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://e7th50gm4y7u"]
+
+[ext_resource type="PackedScene" uid="uid://codh86ubcjemt" path="res://Assets/TQ/Models/Blend/Blockout_1x6.blend" id="1_micxi"]
+
+[node name="Blockout_1x6" instance=ExtResource("1_micxi")]
+
+[node name="basicWall_001" parent="." index="2"]
+transform = Transform3D(0.978412, 0.206665, 0, 0, 0, -1, -0.206665, 0.978412, 0, 0, 0, -29.8652)

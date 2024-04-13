@@ -1,0 +1,73 @@
+[gd_scene load_steps=15 format=3 uid="uid://psps2v8iehip"]
+
+[ext_resource type="PackedScene" uid="uid://b2rd57c6nquvn" path="res://Assets/TQ/Toys/FloorMaker.tscn" id="1_w4n6q"]
+[ext_resource type="PackedScene" uid="uid://bd2yd0hmocelj" path="res://Assets/TQ/Models/GLTF/test_room.glb" id="2_ptf0y"]
+[ext_resource type="PackedScene" uid="uid://gmw8c56p7e40" path="res://Assets/TQ/Toys/WallMaker.tscn" id="2_yfaor"]
+[ext_resource type="Shader" path="res://Assets/TQ/Shaders_Materials/EdgeDetection_A.gdshader" id="3_6wk8e"]
+[ext_resource type="Texture2D" uid="uid://dtnqnaierwdv3" path="res://Assets/TQ/textures/Planks033B_2K-PNG/Planks033B_2K-PNG_Displacement.png" id="4_vv3rs"]
+[ext_resource type="Texture2D" uid="uid://bwrsiwrkxktpv" path="res://Assets/TQ/textures/Planks033B_2K-PNG/Planks033B_2K-PNG_NormalGL.png" id="5_yuqr7"]
+[ext_resource type="Texture2D" uid="uid://bk86iv1wvmev6" path="res://Assets/TQ/textures/Planks033B_2K-PNG/Planks033B_2K-PNG_Roughness.png" id="6_tnb0x"]
+[ext_resource type="Shader" uid="uid://cmd077foxrq2w" path="res://Assets/TQ/Shaders_Materials/TheVoid_Shader.tres" id="8_db2ra"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eyxwy"]
+render_priority = 0
+shader = ExtResource("3_6wk8e")
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 2.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_my7hq"]
+albedo_color = Color(0.827451, 0.607843, 0.458824, 1)
+roughness_texture = ExtResource("6_tnb0x")
+normal_enabled = true
+normal_texture = ExtResource("5_yuqr7")
+heightmap_enabled = true
+heightmap_texture = ExtResource("4_vv3rs")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i605a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t323l"]
+render_priority = 0
+shader = ExtResource("3_6wk8e")
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 2.0
+shader_parameter/constant_width = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yjq7u"]
+render_priority = 0
+shader = ExtResource("8_db2ra")
+
+[sub_resource type="SphereMesh" id="SphereMesh_wt3lw"]
+material = SubResource("ShaderMaterial_yjq7u")
+
+[node name="DevRoom" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.7811)
+
+[node name="Geometry" type="Node" parent="."]
+
+[node name="Floors" parent="Geometry" instance=ExtResource("1_w4n6q")]
+
+[node name="Walls" parent="Geometry" instance=ExtResource("2_yfaor")]
+
+[node name="test_room" parent="." instance=ExtResource("2_ptf0y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.459554, 0, 0.34202)
+
+[node name="Cube_010" parent="test_room" index="10"]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 9.81864, 3.20689, 1.12684)
+material_overlay = SubResource("ShaderMaterial_eyxwy")
+
+[node name="Cube_011" parent="test_room" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8337, 1.20315, -0.77588)
+surface_material_override/0 = SubResource("StandardMaterial3D_my7hq")
+surface_material_override/1 = SubResource("StandardMaterial3D_i605a")
+
+[node name="Cube_023" parent="test_room" index="23"]
+transform = Transform3D(0.370356, -0.92889, 2.98023e-07, -2.98023e-07, 2.38419e-07, 1, -0.92889, -0.370356, -2.38419e-07, 12.8658, 2.43675, 1.19768)
+material_overlay = SubResource("ShaderMaterial_t323l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.91307, 1.27726, 12.4664)
+mesh = SubResource("SphereMesh_wt3lw")
+
+[editable path="test_room"]

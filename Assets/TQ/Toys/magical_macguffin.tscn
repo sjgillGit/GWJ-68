@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc46uoe0w4ypg"]
+
+[ext_resource type="Shader" uid="uid://cmd077foxrq2w" path="res://Assets/TQ/Shaders_Materials/TheVoid_Shader.tres" id="1_rh5at"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yjq7u"]
+render_priority = 0
+shader = ExtResource("1_rh5at")
+
+[sub_resource type="SphereMesh" id="SphereMesh_wt3lw"]
+material = SubResource("ShaderMaterial_yjq7u")
+
+[node name="Magical_Macguffin" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0784486)
+mesh = SubResource("SphereMesh_wt3lw")
