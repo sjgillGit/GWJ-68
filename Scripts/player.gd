@@ -2,6 +2,9 @@ extends CharacterBody3D
 
 @export
 var SPEED: float = 5.0
+@export
+var current_camera: Camera3D = null
+
 const SPRINT_MOD: float = 2.0
 const JUMP_VELOCITY: float = 4.5
 const FORCE_MULTIPLIER: float = 0.001
@@ -22,6 +25,17 @@ func process_gravity(delta: float):
 func handle_jump_input():
 	if Input.is_action_just_pressed("move_jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		
+func calculate_final_direction(camera):
+	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	if camera != null && camera.is_player_movement_adjusted:
+		var camera_basis = camera.get_global_transform().basis
+		#var camera_angle = camera_basis.z
+		direction = (camera_basis * direction).normalized()
+		
+	return direction
 	
 func modify_speed_for_sprint():
 	if Input.is_action_just_pressed("move_sprint"):
@@ -55,12 +69,8 @@ func _physics_process(delta):
 	
 	handle_jump_input()
 
-	# Get the input direction and handle the movement/deceleration.
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
+	var direction = calculate_final_direction(current_camera)
 	var speed = modify_speed_for_sprint()
-	
 	apply_movement(delta, direction, speed)
 	
 	move_and_slide()
