@@ -1,0 +1,67 @@
+extends CharacterBody3D
+
+@export
+var SPEED: float = 5.0
+const SPRINT_MOD: float = 2.0
+const JUMP_VELOCITY: float = 4.5
+const FORCE_MULTIPLIER: float = 0.001
+
+var final_speed: float = SPEED
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+func _ready():
+	final_speed = SPEED
+	
+func process_gravity(delta: float):
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	pass
+	
+func handle_jump_input():
+	if Input.is_action_just_pressed("move_jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	
+func modify_speed_for_sprint():
+	if Input.is_action_just_pressed("move_sprint"):
+		final_speed = SPEED * SPRINT_MOD
+	if Input.is_action_just_released("move_sprint"):
+		final_speed = SPEED
+		
+	return final_speed
+	
+func apply_movement(_delta: float, direction, speed: float):
+	if direction:
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+		
+func collide_with_rigidbodies_godot4_fix():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var other_body = collision.get_collider()
+		
+		var force = velocity
+		if other_body is RigidBody3D:
+			var apply_force = final_speed * FORCE_MULTIPLIER
+#			#other_body.apply_force(-collision.get_normal() * 0.3)
+			other_body.apply_impulse(-collision.get_normal() * apply_force)
+
+func _physics_process(delta):
+	process_gravity(delta)
+	
+	handle_jump_input()
+
+	# Get the input direction and handle the movement/deceleration.
+	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	var speed = modify_speed_for_sprint()
+	
+	apply_movement(delta, direction, speed)
+	
+	move_and_slide()
+	collide_with_rigidbodies_godot4_fix()
