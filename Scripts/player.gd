@@ -2,6 +2,10 @@ extends CharacterBody3D
 
 @export
 var SPEED: float = 5.0
+@export
+var acceleration: float = 2.00
+@export
+var deceleration: float = 1.25
 
 const SPRINT_MOD: float = 2.0
 const JUMP_VELOCITY: float = 4.5
@@ -48,11 +52,11 @@ func modify_speed_for_sprint():
 	
 func apply_movement(_delta: float, direction, speed: float):
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		velocity.x = move_toward(velocity.x, direction.x * speed, acceleration)
+		velocity.z = move_toward(velocity.z, direction.z * speed, acceleration)
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, deceleration)
+		velocity.z = move_toward(velocity.z, 0, deceleration)
 		
 func collide_with_rigidbodies_godot4_fix():
 	for i in get_slide_collision_count():
