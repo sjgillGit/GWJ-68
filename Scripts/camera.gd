@@ -18,7 +18,6 @@ func _process(delta):
 	var player: CharacterBody3D = %Player
 	
 	if player != null:
-		look_at(player.global_position)
 		
 		var parent = get_parent_node_3d()
 		
@@ -31,4 +30,5 @@ func _process(delta):
 				parent.progress = path.curve.get_closest_offset(path.to_local(player.global_position))
 			pass
 
+		look_at(player.global_position)
 	pass
