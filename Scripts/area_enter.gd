@@ -23,8 +23,7 @@ func _process(delta):
 func _on_body_entered(body):
 	if body is CharacterBody3D:
 		if give_back_camera:
-			old_camera = body.current_camera
-		body.current_camera = local_camera
+			old_camera = get_viewport().get_camera_3d()
 		local_camera.current = true
 	
 	pass # Replace with function body.
@@ -33,7 +32,6 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	if body is CharacterBody3D:
 		if give_back_camera:
-			body.current_camera = old_camera
 			old_camera.current = true
 			old_camera = null
 		
