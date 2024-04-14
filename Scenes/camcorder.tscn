@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp66ahbyddhoc"]
+
+[ext_resource type="Script" path="res://Scripts/camera.gd" id="1_gr4k6"]
+
+[node name="Camera3D" type="Camera3D"]
+transform = Transform3D(0.350939, -0.251973, 0.90186, 4.20981e-06, 0.963116, 0.269086, -0.936398, -0.094429, 0.337996, 1.51731, 3.10932, 1.76999)
+script = ExtResource("1_gr4k6")
+is_player_movement_adjusted = true

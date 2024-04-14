@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://cov4p6bj4wqua"]
 
 [ext_resource type="PackedScene" uid="uid://dm7ims2w6nn7q" path="res://Scenes/character_body_3d.tscn" id="1_ob18n"]
-[ext_resource type="Script" path="res://Scripts/camera.gd" id="2_easba"]
 [ext_resource type="Script" path="res://Scripts/area_enter.gd" id="3_bv0wr"]
+[ext_resource type="PackedScene" uid="uid://bp66ahbyddhoc" path="res://Scenes/camcorder.tscn" id="4_ayvgr"]
 
 [sub_resource type="Curve3D" id="Curve3D_n7ltc"]
 _data = {
@@ -50,10 +50,7 @@ curve = SubResource("Curve3D_n7ltc")
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 transform = Transform3D(0.0278998, 4.494e-06, -0.999611, -2.27374e-13, 1, 4.49575e-06, 0.999611, -1.2543e-07, 0.0278998, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D"]
-transform = Transform3D(0.350939, -0.251973, 0.90186, 4.20981e-06, 0.963116, 0.269086, -0.936398, -0.094429, 0.337996, 3.63797, 1.68268, 2.29804)
-script = ExtResource("2_easba")
-is_player_movement_adjusted = true
+[node name="Camera3D" parent="Path3D/PathFollow3D" instance=ExtResource("4_ayvgr")]
 
 [node name="Player" parent="." instance=ExtResource("1_ob18n")]
 unique_name_in_owner = true
@@ -108,10 +105,7 @@ script = ExtResource("3_bv0wr")
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("BoxShape3D_diq5a")
 
-[node name="Camera3D" type="Camera3D" parent="Area3D"]
-transform = Transform3D(0.350939, -0.251973, 0.90186, 4.20981e-06, 0.963116, 0.269086, -0.936398, -0.094429, 0.337996, 1.51731, 3.10932, 1.76999)
-script = ExtResource("2_easba")
-is_player_movement_adjusted = true
+[node name="Camera3D" parent="Area3D" instance=ExtResource("4_ayvgr")]
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]
