@@ -2,8 +2,6 @@ extends CharacterBody3D
 
 @export
 var SPEED: float = 5.0
-@export
-var current_camera: Camera3D = null
 
 const SPRINT_MOD: float = 2.0
 const JUMP_VELOCITY: float = 4.5
@@ -16,6 +14,9 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	final_speed = SPEED
+	
+func _get_current_camera():
+	return get_viewport().get_camera_3d()
 	
 func process_gravity(delta: float):
 	if not is_on_floor():
@@ -69,8 +70,10 @@ func _physics_process(delta):
 	
 	handle_jump_input()
 
-	var direction = calculate_final_direction(current_camera)
+	var direction = calculate_final_direction(_get_current_camera())
 	var speed = modify_speed_for_sprint()
+	
+	#if is_on_floor():
 	apply_movement(delta, direction, speed)
 	
 	move_and_slide()

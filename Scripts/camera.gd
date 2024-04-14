@@ -18,5 +18,6 @@ func _process(delta):
 	if parent is PathFollow3D:
 		if player.global_position.distance_to(global_position) > 5:
 			parent.progress += 0.05
+			pass
 
 	pass
