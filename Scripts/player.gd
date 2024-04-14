@@ -33,14 +33,51 @@ func handle_jump_input():
 		
 func calculate_final_direction(camera):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var input_flat = Vector3(input_dir.x, 0, input_dir.y)
+	var input_flatter = Vector2(input_dir.x, input_dir.y)
 	
-	if camera != null && camera.is_player_movement_adjusted:
-		var camera_basis = camera.get_global_transform().basis
-		#var camera_angle = camera_basis.z
-		direction = (camera_basis * direction).normalized()
+	
+	#print(camera.get_global_transform().basis.x)
+	
+	if camera != null || camera.is_player_movement_adjusted:
+		var camera_vector_flat: Vector3 = camera.get_global_transform().basis.x
+		var camera_vector_flatter = Vector2(camera_vector_flat.x, camera_vector_flat.z)
 		
-	return direction
+		
+		
+		#print(camera_vector_flatter)
+		
+		#input_flat = input_flat.dot(camera_vector_flat)
+		
+		var camera_angle_rads_3 = Vector3(1,0,0).angle_to(camera_vector_flat)
+		var camera_angle_rads_2 = Vector2(1,0).angle_to(camera_vector_flatter)
+		
+		# input_flat = input_flat.rotated(Vector3(0,1,0), camera_angle_rads_3)
+		
+		#print (camera_angle_rads_3)
+		#print (camera_angle_rads_2)
+		
+		input_flatter = input_flatter.rotated(camera_angle_rads_2)
+		input_flat = Vector3(input_flatter.x, 0, input_flatter.y)
+		
+		
+		
+	#	return (transform.basis * input_flat).normalized()
+	#else:
+	#	return (camera.get_global_transform().basis * input_flat).normalized()
+		
+	#	var camera_basis = camera.get_global_transform().basis
+	#	var camera_angle = camera_basis.z
+		
+		#print(camera_angle)
+		
+		# var rotated = direction.rotated(Vector3(0,1,0), rads)
+		
+		# direction = (camera_basis * direction).normalized()
+		
+	# return direction
+	
+	return (transform.basis * input_flat).normalized()
 	
 func modify_speed_for_sprint():
 	if Input.is_action_just_pressed("move_sprint"):
