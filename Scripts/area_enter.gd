@@ -15,10 +15,11 @@ func _on_body_entered(body):
 	if body is CharacterBody3D:
 		if give_back_camera:
 			old_camera = get_viewport().get_camera_3d()
-		local_camera.current = true
+		if local_camera != null:
+			local_camera.current = true
 
 func _on_body_exited(body):
 	if body is CharacterBody3D:
-		if give_back_camera:
+		if give_back_camera && old_camera != null:
 			old_camera.current = true
 			old_camera = null
