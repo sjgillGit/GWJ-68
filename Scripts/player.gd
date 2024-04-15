@@ -49,7 +49,7 @@ func calculate_final_direction(camera):
 		
 		#input_flat = input_flat.dot(camera_vector_flat)
 		
-		var camera_angle_rads_3 = Vector3(1,0,0).angle_to(camera_vector_flat)
+		# var camera_angle_rads_3 = Vector3(1,0,0).angle_to(camera_vector_flat)
 		var camera_angle_rads_2 = Vector2(1,0).angle_to(camera_vector_flatter)
 		
 		# input_flat = input_flat.rotated(Vector3(0,1,0), camera_angle_rads_3)
@@ -100,7 +100,6 @@ func collide_with_rigidbodies_godot4_fix():
 		var collision = get_slide_collision(i)
 		var other_body = collision.get_collider()
 		
-		var force = velocity
 		if other_body is RigidBody3D:
 			var apply_force = final_speed * FORCE_MULTIPLIER
 #			#other_body.apply_force(-collision.get_normal() * 0.3)
