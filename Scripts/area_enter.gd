@@ -7,8 +7,8 @@ var give_back_camera: bool = true
 var old_camera
 
 func _ready():
-	var attempt_get_local_camera = $Camera3D
-	if attempt_get_local_camera != null && local_camera == null:
+	if local_camera == null:
+		var attempt_get_local_camera = $Camera3D
 		local_camera = attempt_get_local_camera
 
 func _on_body_entered(body):
