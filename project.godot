@@ -13,3 +13,8 @@ config_version=5
 config/name="GWJ-68"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SavingManager="*res://Scripts/Saving/SavingManager.gd"
+JsonHelper="*res://Scripts/Utils/JsonHelper.gd"

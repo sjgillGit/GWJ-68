@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://svvgjtmktjmb"]
+
+[ext_resource type="Script" path="res://Scripts/Saving/SavingComponent.gd" id="1_v0vkg"]
+
+[sub_resource type="GDScript" id="GDScript_nkn2k"]
+script/source = "extends Button
+
+
+
+func _on_pressed():
+	SavingManager.save_data()
+"
+
+[sub_resource type="GDScript" id="GDScript_xcqi3"]
+script/source = "extends Button
+
+
+func _on_pressed():
+	SavingManager.load_data()
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 448.0
+offset_top = 128.0
+offset_right = 759.0
+offset_bottom = 159.0
+
+[node name="SavingComponent" type="Node" parent="LineEdit"]
+script = ExtResource("1_v0vkg")
+properties_to_save = Array[String](["text"])
+
+[node name="Label" type="Label" parent="."]
+offset_left = 192.0
+offset_top = 40.0
+offset_right = 479.0
+offset_bottom = 65.0
+text = "Example of saving system"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 376.0
+offset_bottom = 151.0
+text = "LineEdit is an example of savable object:"
+
+[node name="SaveButton" type="Button" parent="."]
+offset_left = 128.0
+offset_top = 280.0
+offset_right = 320.0
+offset_bottom = 324.0
+text = "Save"
+script = SubResource("GDScript_nkn2k")
+
+[node name="LoadButton" type="Button" parent="."]
+offset_left = 448.0
+offset_top = 280.0
+offset_right = 640.0
+offset_bottom = 324.0
+text = "Load"
+script = SubResource("GDScript_xcqi3")
+
+[connection signal="pressed" from="SaveButton" to="SaveButton" method="_on_pressed"]
+[connection signal="pressed" from="LoadButton" to="LoadButton" method="_on_pressed"]
