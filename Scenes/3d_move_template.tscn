@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cov4p6bj4wqua"]
+[gd_scene load_steps=21 format=3 uid="uid://cov4p6bj4wqua"]
 
 [ext_resource type="PackedScene" uid="uid://dm7ims2w6nn7q" path="res://Scenes/character_body_3d.tscn" id="1_ob18n"]
 [ext_resource type="Script" path="res://Scripts/area_enter.gd" id="3_bv0wr"]
@@ -50,6 +50,9 @@ point_count = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1op0e"]
 size = Vector3(11.7751, 1, 22.1316)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cnmmb"]
+size = Vector3(6.81021, 3.99561, 6.32751)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vd2fq"]
 
@@ -130,7 +133,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.672, 0.417595, -6.10058)
 curve = SubResource("Curve3D_n7ltc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Play_Area_1/Camera_Path_Jerky"]
-transform = Transform3D(0.005917, 0, 0.999979, 0, 1, 0, -0.999983, 0, 0.00591697, 20.4953, 7.39098e-06, -12.8028)
+transform = Transform3D(0.00591557, 0, 0.999979, 0, 1, 0, -0.999983, 0, 0.00591554, 20.4953, 7.39098e-06, -12.8028)
 
 [node name="Camera3D" parent="Play_Area_1/Camera_Path_Jerky/PathFollow3D" instance=ExtResource("4_ayvgr")]
 transform = Transform3D(-0.344619, 0.252604, -0.904118, -0.168548, 0.930815, 0.324308, 0.92349, 0.264151, -0.278202, -0.294395, 7.80846, -3.87283)
@@ -162,6 +165,7 @@ give_back_camera = false
 curve = SubResource("Curve3D_4u331")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Play_Area_2/Path3D"]
+transform = Transform3D(0.999985, 0, -0.00543501, 0, 1, 0, 0.00543501, 0, 0.999985, -5.31579, 0, 6.38841)
 
 [node name="Camera3D" parent="Play_Area_2/Path3D/PathFollow3D" instance=ExtResource("4_ayvgr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.57368, 3.88616, 6.38169)
@@ -170,16 +174,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.57368, 3.88616, 6.38169)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.134155, 0, -2.70766)
 shape = SubResource("BoxShape3D_1op0e")
 
-[node name="Secret_Area" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.20427, 0.0255117, 6.27352)
+[node name="Secret_Area" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.88003, -9.53674e-07, 6.60814)
+
+[node name="Secret_Area_Enter" type="Area3D" parent="Secret_Area" node_paths=PackedStringArray("local_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.324242, 0.0255127, -0.334617)
 collision_layer = 0
 script = ExtResource("3_bv0wr")
+local_camera = NodePath("Camera3D")
+give_back_camera = false
 
-[node name="AreaEnter" type="CollisionShape3D" parent="Secret_Area"]
+[node name="AreaEnter" type="CollisionShape3D" parent="Secret_Area/Secret_Area_Enter"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("BoxShape3D_diq5a")
 
-[node name="Camera3D" parent="Secret_Area" instance=ExtResource("4_ayvgr")]
+[node name="Camera3D" parent="Secret_Area/Secret_Area_Enter" instance=ExtResource("4_ayvgr")]
+
+[node name="Secret_Area_Exit" type="Area3D" parent="Secret_Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.324242, 0.0255127, -0.334617)
+collision_layer = 0
+script = ExtResource("3_bv0wr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Secret_Area/Secret_Area_Exit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.106552, 1.4978, 0.00848389)
+shape = SubResource("BoxShape3D_cnmmb")
 
 [node name="Box" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.506295, 1.92479, 9.73521)
@@ -208,5 +226,7 @@ mesh = SubResource("BoxMesh_ryphr")
 [connection signal="body_exited" from="Transition_Area" to="Transition_Area" method="_on_body_exited"]
 [connection signal="body_entered" from="Play_Area_2" to="Play_Area_2" method="_on_body_entered"]
 [connection signal="body_exited" from="Play_Area_2" to="Play_Area_2" method="_on_body_exited"]
-[connection signal="body_entered" from="Secret_Area" to="Secret_Area" method="_on_body_entered"]
-[connection signal="body_exited" from="Secret_Area" to="Secret_Area" method="_on_body_exited"]
+[connection signal="body_entered" from="Secret_Area/Secret_Area_Enter" to="Secret_Area/Secret_Area_Enter" method="_on_body_entered"]
+[connection signal="body_exited" from="Secret_Area/Secret_Area_Enter" to="Secret_Area/Secret_Area_Enter" method="_on_body_exited"]
+[connection signal="body_entered" from="Secret_Area/Secret_Area_Exit" to="Secret_Area/Secret_Area_Exit" method="_on_body_entered"]
+[connection signal="body_exited" from="Secret_Area/Secret_Area_Exit" to="Secret_Area/Secret_Area_Exit" method="_on_body_exited"]
