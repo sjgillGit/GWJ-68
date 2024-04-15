@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cov4p6bj4wqua"]
+[gd_scene load_steps=20 format=3 uid="uid://cov4p6bj4wqua"]
 
 [ext_resource type="PackedScene" uid="uid://dm7ims2w6nn7q" path="res://Scenes/character_body_3d.tscn" id="1_ob18n"]
 [ext_resource type="Script" path="res://Scripts/area_enter.gd" id="3_bv0wr"]
@@ -37,6 +37,19 @@ point_count = 4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3cbrk"]
 size = Vector3(33.3859, 15.4409, 36.8014)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ebh6"]
+size = Vector3(9.08694, 1, 7.05212)
+
+[sub_resource type="Curve3D" id="Curve3D_4u331"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -5.31579, 0, 6.38841, 0, 0, 0, 0, 0, 0, -5.21928, 0, -11.3685),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1op0e"]
+size = Vector3(11.7751, 1, 22.1316)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vd2fq"]
 
@@ -126,6 +139,37 @@ transform = Transform3D(-0.344619, 0.252604, -0.904118, -0.168548, 0.930815, 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.66885, 4.85074, -1.85272)
 shape = SubResource("BoxShape3D_3cbrk")
 
+[node name="Transition_Area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5163, 0.0255136, -12.6931)
+collision_layer = 0
+script = ExtResource("3_bv0wr")
+give_back_camera = false
+
+[node name="Camera3D" parent="Transition_Area" instance=ExtResource("4_ayvgr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Transition_Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.10991, 0, 0.193054)
+shape = SubResource("BoxShape3D_1ebh6")
+
+[node name="Play_Area_2" type="Area3D" parent="." node_paths=PackedStringArray("local_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3811, 0, -26.2587)
+collision_layer = 0
+script = ExtResource("3_bv0wr")
+local_camera = NodePath("Path3D/PathFollow3D/Camera3D")
+give_back_camera = false
+
+[node name="Path3D" type="Path3D" parent="Play_Area_2"]
+curve = SubResource("Curve3D_4u331")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Play_Area_2/Path3D"]
+
+[node name="Camera3D" parent="Play_Area_2/Path3D/PathFollow3D" instance=ExtResource("4_ayvgr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.57368, 3.88616, 6.38169)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Play_Area_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.134155, 0, -2.70766)
+shape = SubResource("BoxShape3D_1op0e")
+
 [node name="Secret_Area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.20427, 0.0255117, 6.27352)
 collision_layer = 0
@@ -158,21 +202,11 @@ shape = SubResource("BoxShape3D_diq5a")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3"]
 mesh = SubResource("BoxMesh_ryphr")
 
-[node name="Transition_Area" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5163, 0.0255136, -12.6931)
-collision_layer = 0
-script = ExtResource("3_bv0wr")
-give_back_camera = false
-
-[node name="AreaEnter" type="CollisionShape3D" parent="Transition_Area"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-shape = SubResource("BoxShape3D_diq5a")
-
-[node name="Camera3D" parent="Transition_Area" instance=ExtResource("4_ayvgr")]
-
 [connection signal="body_entered" from="Play_Area_1" to="Play_Area_1" method="_on_body_entered"]
 [connection signal="body_exited" from="Play_Area_1" to="Play_Area_1" method="_on_body_exited"]
-[connection signal="body_entered" from="Secret_Area" to="Secret_Area" method="_on_body_entered"]
-[connection signal="body_exited" from="Secret_Area" to="Secret_Area" method="_on_body_exited"]
 [connection signal="body_entered" from="Transition_Area" to="Transition_Area" method="_on_body_entered"]
 [connection signal="body_exited" from="Transition_Area" to="Transition_Area" method="_on_body_exited"]
+[connection signal="body_entered" from="Play_Area_2" to="Play_Area_2" method="_on_body_entered"]
+[connection signal="body_exited" from="Play_Area_2" to="Play_Area_2" method="_on_body_exited"]
+[connection signal="body_entered" from="Secret_Area" to="Secret_Area" method="_on_body_entered"]
+[connection signal="body_exited" from="Secret_Area" to="Secret_Area" method="_on_body_exited"]
