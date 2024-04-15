@@ -6,10 +6,10 @@
 
 [sub_resource type="Curve3D" id="Curve3D_n7ltc"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10.7083, -4.81606e-05, -0.298876, 0, 0, 0, 0, 0, 0, -2.54563, -4.81606e-05, -0.523519, 0, 0, 0, 0, 0, 0, -3.4442, -4.81606e-05, -11.6433, 0, 0, 0, 0, 0, 0, 13.404, -4.81606e-05, -11.3064),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 17.5665, 0.686344, 23.3669, 0, 0, 0, 0, 0, 0, -2.34087, -2.94781, 23.7883, 0, 0, 0, 0, 0, 0, -2.15244, 0.9037, -11.0308, 0, 0, 0, 0, 0, 0, 21.2127, 3.85957, -8.83895),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
 }
-point_count = 5
+point_count = 4
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vd2fq"]
 
@@ -44,7 +44,7 @@ sky = SubResource("Sky_j2gi8")
 [node name="Node3D" type="Node3D"]
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.27852, 2.94438, 4.55303)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5189, 0.417595, -6.10058)
 curve = SubResource("Curve3D_n7ltc")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
@@ -54,9 +54,10 @@ transform = Transform3D(0.0278998, 4.494e-06, -0.999611, -2.27374e-13, 1, 4.4957
 
 [node name="Player" parent="." instance=ExtResource("1_ob18n")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02585, 1.90735e-06, 7.7201)
 
 [node name="Box" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.534467, 1.92479, -0.600358)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.506295, 1.92479, 9.73521)
 mass = 0.02
 physics_material_override = SubResource("PhysicsMaterial_vd2fq")
 
@@ -76,8 +77,17 @@ shape = SubResource("BoxShape3D_diq5a")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("BoxMesh_ryphr")
 
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 2.88064, 3.33331, 1.33156, 0.284782)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("BoxShape3D_diq5a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+mesh = SubResource("BoxMesh_ryphr")
+
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23678, 2.22794, 0.199632)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.64794, 2.22794, 6.41504)
 light_size = 1.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
