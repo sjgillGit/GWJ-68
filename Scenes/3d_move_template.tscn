@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cov4p6bj4wqua"]
+[gd_scene load_steps=17 format=3 uid="uid://cov4p6bj4wqua"]
 
 [ext_resource type="PackedScene" uid="uid://dm7ims2w6nn7q" path="res://Scenes/character_body_3d.tscn" id="1_ob18n"]
 [ext_resource type="Script" path="res://Scripts/area_enter.gd" id="3_bv0wr"]
@@ -30,10 +30,13 @@ sky = SubResource("Sky_j2gi8")
 
 [sub_resource type="Curve3D" id="Curve3D_n7ltc"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 17.5665, 0.686344, 23.3669, 0, 0, 0, 0, 0, 0, -2.34087, -2.94781, 23.7883, 0, 0, 0, 0, 0, 0, -2.15244, 0.9037, -11.0308, 0, 0, 0, 0, 0, 0, 21.2127, 3.85957, -8.83895),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 20.4953, 7.39098e-06, -12.8028, 0, 0, 0, 0, 0, 0, -5.38553, 7.39098e-06, -12.9559, 0, 0, 0, 0, 0, 0, -5.38553, 7.39098e-06, 24.4105, 0, 0, 0, 0, 0, 0, 19.8827, 7.39098e-06, 24.5636),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3cbrk"]
+size = Vector3(33.3859, 15.4409, 36.8014)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vd2fq"]
 
@@ -94,25 +97,45 @@ shape = SubResource("BoxShape3D_diq5a")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
 mesh = SubResource("BoxMesh_ryphr")
 
-[node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5189, 0.417595, -6.10058)
+[node name="Wall2" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.305304, 0, 2.8804, 0, 15, 0, -23.8959, 0, -0.0368014, 16.1052, 1.37329, 2.90536)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
+shape = SubResource("BoxShape3D_diq5a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2"]
+mesh = SubResource("BoxMesh_ryphr")
+
+[node name="Play_Area_1" type="Area3D" parent="." node_paths=PackedStringArray("local_camera")]
+collision_layer = 0
+script = ExtResource("3_bv0wr")
+local_camera = NodePath("Camera_Path_Jerky/PathFollow3D/Camera3D")
+give_back_camera = false
+
+[node name="Camera_Path_Jerky" type="Path3D" parent="Play_Area_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.672, 0.417595, -6.10058)
 curve = SubResource("Curve3D_n7ltc")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.0278998, 4.494e-06, -0.999611, -2.27374e-13, 1, 4.49575e-06, 0.999611, -1.2543e-07, 0.0278998, 0, 0, 0)
+[node name="PathFollow3D" type="PathFollow3D" parent="Play_Area_1/Camera_Path_Jerky"]
+transform = Transform3D(0.005917, 0, 0.999979, 0, 1, 0, -0.999983, 0, 0.00591697, 20.4953, 7.39098e-06, -12.8028)
 
-[node name="Camera3D" parent="Path3D/PathFollow3D" instance=ExtResource("4_ayvgr")]
+[node name="Camera3D" parent="Play_Area_1/Camera_Path_Jerky/PathFollow3D" instance=ExtResource("4_ayvgr")]
+transform = Transform3D(-0.344619, 0.252604, -0.904118, -0.168548, 0.930815, 0.324308, 0.92349, 0.264151, -0.278202, -0.294395, 7.80846, -3.87283)
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Play_Area_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.66885, 4.85074, -1.85272)
+shape = SubResource("BoxShape3D_3cbrk")
+
+[node name="Secret_Area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.20427, 0.0255117, 6.27352)
 collision_layer = 0
 script = ExtResource("3_bv0wr")
 
-[node name="AreaEnter" type="CollisionShape3D" parent="Area3D"]
+[node name="AreaEnter" type="CollisionShape3D" parent="Secret_Area"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("BoxShape3D_diq5a")
 
-[node name="Camera3D" parent="Area3D" instance=ExtResource("4_ayvgr")]
+[node name="Camera3D" parent="Secret_Area" instance=ExtResource("4_ayvgr")]
 
 [node name="Box" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.506295, 1.92479, 9.73521)
@@ -126,14 +149,30 @@ shape = SubResource("BoxShape3D_7ysjw")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
 mesh = SubResource("BoxMesh_qmuuw")
 
-[node name="Wall2" type="StaticBody3D" parent="."]
-transform = Transform3D(-0.305304, 0, 2.8804, 0, 15, 0, -23.8959, 0, -0.0368014, 16.1052, 1.37329, 2.90536)
+[node name="Wall3" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.305304, 0, 2.8804, 0, 15, 0, -23.8959, 0, -0.0368014, 24.2366, 1.37329, -20.6169)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3"]
 shape = SubResource("BoxShape3D_diq5a")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3"]
 mesh = SubResource("BoxMesh_ryphr")
 
-[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
-[connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]
+[node name="Transition_Area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5163, 0.0255136, -12.6931)
+collision_layer = 0
+script = ExtResource("3_bv0wr")
+give_back_camera = false
+
+[node name="AreaEnter" type="CollisionShape3D" parent="Transition_Area"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("BoxShape3D_diq5a")
+
+[node name="Camera3D" parent="Transition_Area" instance=ExtResource("4_ayvgr")]
+
+[connection signal="body_entered" from="Play_Area_1" to="Play_Area_1" method="_on_body_entered"]
+[connection signal="body_exited" from="Play_Area_1" to="Play_Area_1" method="_on_body_exited"]
+[connection signal="body_entered" from="Secret_Area" to="Secret_Area" method="_on_body_entered"]
+[connection signal="body_exited" from="Secret_Area" to="Secret_Area" method="_on_body_exited"]
+[connection signal="body_entered" from="Transition_Area" to="Transition_Area" method="_on_body_entered"]
+[connection signal="body_exited" from="Transition_Area" to="Transition_Area" method="_on_body_exited"]
