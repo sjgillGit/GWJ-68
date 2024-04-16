@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cov4p6bj4wqua"]
+[gd_scene load_steps=24 format=3 uid="uid://cov4p6bj4wqua"]
 
 [ext_resource type="PackedScene" uid="uid://dm7ims2w6nn7q" path="res://Scenes/character_body_3d.tscn" id="1_ob18n"]
 [ext_resource type="Script" path="res://Scripts/area_enter.gd" id="3_bv0wr"]
@@ -59,6 +59,19 @@ size = Vector3(6.81021, 3.99561, 6.32751)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ysjw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qmuuw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1wxat"]
+size = Vector3(6.86774, 1, 20.5319)
+
+[sub_resource type="Curve3D" id="Curve3D_4geq7"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 5.00977, 0, -10.6485, 0, 0, 0, 0, 0, 0, 5.08817, 0, 8.95271),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vdqg7"]
+size = Vector3(8.09827, 1, 6.28284)
 
 [node name="Node3D" type="Node3D"]
 
@@ -123,6 +136,7 @@ shape = SubResource("BoxShape3D_diq5a")
 mesh = SubResource("BoxMesh_ryphr")
 
 [node name="Play_Area_1" type="Area3D" parent="." node_paths=PackedStringArray("local_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0576286)
 collision_layer = 0
 script = ExtResource("3_bv0wr")
 local_camera = NodePath("Camera_Path_Jerky/PathFollow3D/Camera3D")
@@ -220,6 +234,39 @@ shape = SubResource("BoxShape3D_diq5a")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3"]
 mesh = SubResource("BoxMesh_ryphr")
 
+[node name="Play_Area_3" type="Area3D" parent="." node_paths=PackedStringArray("local_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 9.31323e-10, 0, 1, 30.7313, 0, -19.3425)
+collision_layer = 0
+script = ExtResource("3_bv0wr")
+local_camera = NodePath("Path3D/PathFollow3D/Camera3D")
+give_back_camera = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Play_Area_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.208162, 0, -0.921082)
+shape = SubResource("BoxShape3D_1wxat")
+
+[node name="Path3D" type="Path3D" parent="Play_Area_3"]
+curve = SubResource("Curve3D_4geq7")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Play_Area_3/Path3D"]
+
+[node name="Camera3D" parent="Play_Area_3/Path3D/PathFollow3D" instance=ExtResource("4_ayvgr")]
+transform = Transform3D(0.350939, -0.251973, 0.90186, 4.20981e-06, 0.963116, 0.269086, -0.936398, -0.094429, 0.337996, 1.59572, 3.10932, 1.8484)
+
+[node name="AreaTransition3" type="Area3D" parent="." node_paths=PackedStringArray("local_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.15, 0.0255127, -34.4911)
+collision_layer = 0
+script = ExtResource("3_bv0wr")
+local_camera = NodePath("Camera3D")
+give_back_camera = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaTransition3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51886, 0, -1.47723)
+shape = SubResource("BoxShape3D_vdqg7")
+
+[node name="Camera3D" parent="AreaTransition3" instance=ExtResource("4_ayvgr")]
+transform = Transform3D(0.350939, -0.251973, 0.90186, 4.20981e-06, 0.963116, 0.269086, -0.936398, -0.094429, 0.337996, 5.12393, 3.34565, -5.44325)
+
 [connection signal="body_entered" from="Play_Area_1" to="Play_Area_1" method="_on_body_entered"]
 [connection signal="body_exited" from="Play_Area_1" to="Play_Area_1" method="_on_body_exited"]
 [connection signal="body_entered" from="Transition_Area" to="Transition_Area" method="_on_body_entered"]
@@ -230,3 +277,7 @@ mesh = SubResource("BoxMesh_ryphr")
 [connection signal="body_exited" from="Secret_Area/Secret_Area_Enter" to="Secret_Area/Secret_Area_Enter" method="_on_body_exited"]
 [connection signal="body_entered" from="Secret_Area/Secret_Area_Exit" to="Secret_Area/Secret_Area_Exit" method="_on_body_entered"]
 [connection signal="body_exited" from="Secret_Area/Secret_Area_Exit" to="Secret_Area/Secret_Area_Exit" method="_on_body_exited"]
+[connection signal="body_entered" from="Play_Area_3" to="Play_Area_3" method="_on_body_entered"]
+[connection signal="body_exited" from="Play_Area_3" to="Play_Area_3" method="_on_body_exited"]
+[connection signal="body_entered" from="AreaTransition3" to="AreaTransition3" method="_on_body_entered"]
+[connection signal="body_exited" from="AreaTransition3" to="AreaTransition3" method="_on_body_exited"]
