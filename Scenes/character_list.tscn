@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://carr70jm4uxjk"]
+
+[ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="1_30q8v"]
+[ext_resource type="PackedScene" uid="uid://b4dwd2ilknvic" path="res://Scenes/character_portrait.tscn" id="1_x3t0a"]
+
+[node name="CharacterListContainer" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -250.0
+offset_right = 84.5
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_30q8v")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+scroll_deadzone = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="CharacterPortrait" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CharacterPortrait2" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CharacterPortrait3" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CharacterPortrait4" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CharacterPortrait5" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="HSeparator5" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CharacterPortrait6" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="HSeparator6" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24

@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=3 uid="uid://djfo1yrwnhb3f"]
+
+[ext_resource type="PackedScene" uid="uid://carr70jm4uxjk" path="res://Scenes/character_list.tscn" id="1_0mc04"]
+[ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="2_7mb60"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BG" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_7mb60")
+theme_override_font_sizes/font_size = 32
+text = "Select your character"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+
+[node name="CharacterContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="CharacterPreviewContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DescriptionBox" type="Panel" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/DescriptionBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="CaracterDescription" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/DescriptionBox/MarginContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+horizontal_alignment = 3
+autowrap_mode = 2
+
+[node name="CharacterSelectionContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="CharacterListContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer" instance=ExtResource("1_0mc04")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SelectButton" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("2_7mb60")
+text = "Select
+"
