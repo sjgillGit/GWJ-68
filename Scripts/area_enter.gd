@@ -1,4 +1,5 @@
 extends Area3D
+class_name Camera_Area
 
 @export
 var local_camera: Camera3D = null

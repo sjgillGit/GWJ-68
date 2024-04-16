@@ -1,4 +1,5 @@
 extends Camera3D
+class_name Camcorder
 
 @export
 var is_player_movement_adjusted: bool = false
