@@ -8,6 +8,9 @@ extends Node
 @export var properties_to_save: Array[String]
 @onready var parent = get_parent()
 
+signal before_loaded
+signal after_loaded
+
 
 func get_save_data() -> Dictionary:
 	var data = {}
@@ -20,9 +23,13 @@ func get_save_data() -> Dictionary:
 
 
 func load_data(data: Dictionary) -> void:
+	before_loaded.emit()
+	
 	for property in properties_to_save:
 		if property in parent:
 			parent.set(property, data[property])
+	
+	after_loaded.emit()
 
 
 func _ready() -> void:
