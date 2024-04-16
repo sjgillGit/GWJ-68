@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4dwd2ilknvic"]
+
+[ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="1_lgkf4"]
+[ext_resource type="Texture2D" uid="uid://dj7aymc7bw88m" path="res://Assets/icon.svg" id="2_myfqw"]
+[ext_resource type="FontFile" uid="uid://by6ohp3k752qm" path="res://Fonts/SortsMillGoudy-Regular.ttf" id="3_xpux5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t8yg4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_0887r"]
+base_font = ExtResource("3_xpux5")
+spacing_top = 2
+spacing_bottom = -7
+
+[node name="PanelContainer" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.5
+offset_top = -70.5
+offset_right = 56.5
+offset_bottom = 63.93
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lgkf4")
+theme_override_styles/panel = SubResource("StyleBoxFlat_t8yg4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_myfqw")
+expand_mode = 4
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/font = SubResource("FontVariation_0887r")
+text = "Character Name"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="CharacterPortrait" type="Control" parent="."]
+layout_mode = 2
+theme = ExtResource("1_lgkf4")

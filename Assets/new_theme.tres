@@ -1,0 +1,36 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://c6lscnkcsidri"]
+
+[ext_resource type="FontFile" uid="uid://by6ohp3k752qm" path="res://Fonts/SortsMillGoudy-Regular.ttf" id="1_8x232"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evdq5"]
+bg_color = Color(0, 0, 0, 0.733333)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0rvxu"]
+bg_color = Color(0, 0, 0, 0.686275)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7b0bd"]
+bg_color = Color(0, 0, 0, 0.313726)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_woeeq"]
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ebv4m"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+default_font = ExtResource("1_8x232")
+default_font_size = 16
+Button/fonts/font = ExtResource("1_8x232")
+Button/styles/hover = SubResource("StyleBoxFlat_evdq5")
+Button/styles/normal = null
+Button/styles/pressed = SubResource("StyleBoxFlat_0rvxu")
+Label/fonts/font = ExtResource("1_8x232")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_7b0bd")
+ScrollContainer/styles/panel = SubResource("StyleBoxEmpty_woeeq")
+TabBar/fonts/font = ExtResource("1_8x232")
+TabContainer/styles/tabbar_background = SubResource("StyleBoxFlat_ebv4m")
