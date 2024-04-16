@@ -150,7 +150,7 @@ curve = SubResource("Curve3D_n7ltc")
 transform = Transform3D(0.00591557, 0, 0.999979, 0, 1, 0, -0.999983, 0, 0.00591554, 20.4953, 7.39098e-06, -12.8028)
 
 [node name="Camera3D" parent="Play_Area_1/Camera_Path_Jerky/PathFollow3D" instance=ExtResource("4_ayvgr")]
-transform = Transform3D(-0.344619, 0.252604, -0.904118, -0.168548, 0.930815, 0.324308, 0.92349, 0.264151, -0.278202, -0.294395, 7.80846, -3.87283)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.294395, 7.80846, -3.87283)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Play_Area_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.66885, 4.85074, -1.85272)
@@ -163,6 +163,7 @@ script = ExtResource("3_bv0wr")
 give_back_camera = false
 
 [node name="Camera3D" parent="Transition_Area" instance=ExtResource("4_ayvgr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Transition_Area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.10991, 0, 0.193054)
@@ -249,9 +250,10 @@ shape = SubResource("BoxShape3D_1wxat")
 curve = SubResource("Curve3D_4geq7")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Play_Area_3/Path3D"]
+transform = Transform3D(-0.999992, 0, -0.00399961, 0, 1, 0, 0.00399961, 0, -0.999992, 5.00977, 0, -10.6485)
 
 [node name="Camera3D" parent="Play_Area_3/Path3D/PathFollow3D" instance=ExtResource("4_ayvgr")]
-transform = Transform3D(0.350939, -0.251973, 0.90186, 4.20981e-06, 0.963116, 0.269086, -0.936398, -0.094429, 0.337996, 1.59572, 3.10932, 1.8484)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5954, 3.10932, 1.9315)
 
 [node name="AreaTransition3" type="Area3D" parent="." node_paths=PackedStringArray("local_camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.15, 0.0255127, -34.4911)
@@ -265,7 +267,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51886, 0, -1.47723)
 shape = SubResource("BoxShape3D_vdqg7")
 
 [node name="Camera3D" parent="AreaTransition3" instance=ExtResource("4_ayvgr")]
-transform = Transform3D(0.350939, -0.251973, 0.90186, 4.20981e-06, 0.963116, 0.269086, -0.936398, -0.094429, 0.337996, 5.12393, 3.34565, -5.44325)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.12393, 3.34565, -5.44325)
 
 [connection signal="body_entered" from="Play_Area_1" to="Play_Area_1" method="_on_body_entered"]
 [connection signal="body_exited" from="Play_Area_1" to="Play_Area_1" method="_on_body_exited"]
