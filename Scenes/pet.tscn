@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ute2lmlq05tm"]
+
+[ext_resource type="Script" path="res://Scripts/PetController.gd" id="1_hge5m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ie13s"]
+albedo_color = Color(1, 0.129412, 0.329412, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q5483"]
+material = SubResource("StandardMaterial3D_ie13s")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qhaa4"]
+size = Vector3(1, 0.816055, 1)
+
+[node name="Pet" type="CharacterBody3D"]
+script = ExtResource("1_hge5m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.391009, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_q5483")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00284916, 0)
+shape = SubResource("BoxShape3D_qhaa4")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 3.0

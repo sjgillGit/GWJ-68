@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6tp2y4mwscds"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyController.gd" id="1_hwbcm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xjfk"]
+albedo_color = Color(1, 0.129412, 0.329412, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i8iuj"]
+material = SubResource("StandardMaterial3D_6xjfk")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o8ncu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jafdr"]
+size = Vector3(1.08618, 2.0419, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_butqv"]
+
+[node name="Enemy" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00164, 0)
+script = ExtResource("1_hwbcm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_i8iuj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_o8ncu")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="PlayerDetection" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00622559, 0.0454254, 0)
+shape = SubResource("BoxShape3D_jafdr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.597281, 0, 0, 0, 0.111375, 0, 0, 0, 0.417963, 0, 0.590399, 0.471132)
+mesh = SubResource("BoxMesh_butqv")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
