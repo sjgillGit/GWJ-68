@@ -4,16 +4,13 @@ extends CharacterBody3D
 
 @onready var navAgent = $NavigationAgent3D
 
-var speed = 8
+var speed = 6
 var maxVisibility = 13
 var catchUpDistance = 5
 
 var playerTooFar = false
 
 var currentlyIdle = false
-
-func _ready():
-	speed = randi_range(3,8)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
@@ -44,17 +41,16 @@ func _physics_process(_delta):
 func updateTargetLoc(targetLoc):
 	navAgent.target_position = targetLoc
 	
+	
 func MoveTowardPlayer():
 	updateTargetLoc(player.global_transform.origin)
 
 func idle():
 	if !playerTooFar:
 		currentlyIdle = true
-		var newPos = Vector3(position.x + randi_range(-5,5), position.y, position.z + randi_range(-5,5))
+		var newPos = Vector3(position.x + randi_range(-2,2), position.y, position.z + randi_range(-2,2))
 		updateTargetLoc(newPos)
-		await get_tree().create_timer(randi_range(3,10)).timeout
+		await get_tree().create_timer(randi_range(3,8)).timeout
 		currentlyIdle = false
 		
 	
-
-

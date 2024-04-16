@@ -1,19 +1,19 @@
 extends CharacterBody3D
 
 #Set this to player
-@onready var player
+@onready var player = $"../Player"
 
 @onready var navAgent = $NavigationAgent3D
 
-var speed = 5
-var maxVisibility = 15
+var speed = 3
+var maxVisibility = 10
 var canSeePlayer = false
 
-func _ready():
-	speed = randi_range(3,8)
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta):
+func _physics_process(delta):
+	
+	rotation.x = 0
+	rotation.z = 0
 	
 	# Enemy Movement
 	var currentLocation = global_transform.origin
@@ -36,7 +36,9 @@ func _physics_process(_delta):
 		move_and_slide()
 	
 func updateTargetLoc(targetLoc):
+	#Move towards and look at target
 	navAgent.target_position = targetLoc
+	look_at(targetLoc)
 	
 func MoveTowardPlayer():
 	updateTargetLoc(player.global_transform.origin)
