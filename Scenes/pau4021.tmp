@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://behstix1xiudd"]
+
+[ext_resource type="Script" path="res://Scripts/Pause.gd" id="1_kcrff"]
+[ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="2_thqxy"]
+[ext_resource type="FontFile" uid="uid://by6ohp3k752qm" path="res://Fonts/SortsMillGoudy-Regular.ttf" id="3_h1a1d"]
+[ext_resource type="PackedScene" uid="uid://6jw62cttj5wr" path="res://UI_Scenes/pause_menu.tscn" id="3_s2vm8"]
+[ext_resource type="PackedScene" uid="uid://s6uw8ywe56ro" path="res://UI_Scenes/settings_menu.tscn" id="4_a7p23"]
+
+[node name="PauseScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Pause" type="Control" parent="CanvasLayer"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kcrff")
+
+[node name="bg" type="ColorRect" parent="CanvasLayer/Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.345098)
+
+[node name="SettingsMenu" parent="CanvasLayer/Pause" instance=ExtResource("4_a7p23")]
+visible = false
+layout_mode = 1
+
+[node name="PauseMenu" parent="CanvasLayer/Pause" instance=ExtResource("3_s2vm8")]
+layout_mode = 1
+
+[node name="PauseLabel" type="Label" parent="CanvasLayer/Pause"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 34.48
+offset_right = 48.0
+offset_bottom = 81.4801
+grow_horizontal = 2
+theme = ExtResource("2_thqxy")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("3_h1a1d")
+theme_override_font_sizes/font_size = 32
+text = "Paused"

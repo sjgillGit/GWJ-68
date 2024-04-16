@@ -1,4 +1,4 @@
-# Godot Wild Jam 68
+# The Cursed Macguffin
 
 used Godot `v4.2.1`
 

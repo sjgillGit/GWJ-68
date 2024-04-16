@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2n8fyrsqt7tb"]
+
+[ext_resource type="PackedScene" uid="uid://tf1jefkmtjnn" path="res://Assets/TQ/Models/Blend/Temple_Decor.blend" id="1_m7o6c"]
+[ext_resource type="Shader" path="res://Assets/TQ/Shaders_Materials/EdgeDetection_A.gdshader" id="2_al423"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h30l0"]
+render_priority = 0
+shader = ExtResource("2_al423")
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 4.0
+shader_parameter/constant_width = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_go7xw"]
+render_priority = 0
+shader = ExtResource("2_al423")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 2.0
+shader_parameter/constant_width = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6igaq"]
+render_priority = 0
+shader = ExtResource("2_al423")
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 2.0
+shader_parameter/constant_width = false
+
+[node name="Temple_Decor" instance=ExtResource("1_m7o6c")]
+
+[node name="VaseTwoTone" parent="." index="0"]
+material_overlay = SubResource("ShaderMaterial_h30l0")
+
+[node name="Prayer_Wheel" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.41345, 0.575079, -2.90767e-05)
+material_overlay = SubResource("ShaderMaterial_go7xw")
+
+[node name="Cube_002" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85357, 0.99662, -2.90201e-05)
+material_overlay = SubResource("ShaderMaterial_6igaq")
