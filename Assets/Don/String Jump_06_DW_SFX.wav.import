@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://t1yldp8mwsqu"
+path="res://.godot/imported/String Jump_06_DW_SFX.wav-8faa3fd93dd962f5cabe2bf9c85c1295.sample"
+
+[deps]
+
+source_file="res://Assets/Don/String Jump_06_DW_SFX.wav"
+dest_files=["res://.godot/imported/String Jump_06_DW_SFX.wav-8faa3fd93dd962f5cabe2bf9c85c1295.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxw3rhc0no1io"]
+
+[ext_resource type="PackedScene" uid="uid://dnb1ify5eampb" path="res://Assets/TQ/Models/GLTF/Floors.glb" id="1_7xr47"]
+[ext_resource type="Material" uid="uid://cf6j0nqgbeepj" path="res://Assets/TQ/Shaders_Materials/Materials/Dirty_Blue_Cement.tres" id="2_l47t3"]
+[ext_resource type="Material" uid="uid://b4to45du88hjj" path="res://Assets/TQ/Shaders_Materials/Materials/Stone_Paved.tres" id="3_vry55"]
+[ext_resource type="Material" uid="uid://prvh8oq5gvj5" path="res://Assets/TQ/Shaders_Materials/Materials/Red_metal.tres" id="4_waoho"]
+[ext_resource type="Material" uid="uid://c7y84yyujadxf" path="res://Assets/TQ/Shaders_Materials/Materials/WoodenMat.tres" id="5_ybdhx"]
+[ext_resource type="Material" uid="uid://d1g2dnqdtlim6" path="res://Assets/TQ/Shaders_Materials/Materials/Gravel_noise_txt.tres" id="6_bk6ft"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kj7gy"]
+points = PackedVector3Array(4.38034, -11.611, 2.66525, -6.09524, -0.374471, -6.09405, -2.66582, -11.611, -4.37965, 6.09505, -0.374471, -6.09405, -5.99152, 0.2857, 5.99035, 5.99133, 0.2857, 5.99035, -3.80896, -11.611, 4.18876, 4.18942, -11.611, -3.80818, -4.38053, -11.611, -2.66525, 5.99133, 0.2857, -5.99035, 2.66564, -11.611, 4.37965, -5.99152, 0.2857, -5.99035, -6.09524, -0.374471, 6.09405, 6.09505, -0.374471, 6.09405, -4.38053, -11.611, 2.66525, 2.66564, -11.611, -4.37965, 4.18942, -11.611, 3.80818, -3.80896, -11.611, -4.18876, -2.66582, -11.611, 4.37965, 4.38034, -11.611, -2.66525, 3.80878, -11.611, -4.18876, 3.80878, -11.611, 4.18876, -4.18961, -11.611, -3.80818, -4.18961, -11.611, 3.80818)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xo3wf"]
+points = PackedVector3Array(6.09524, 0.380692, 6.09405, -6.09414, -0.381063, -6.09405, -6.09414, -0.381063, 6.09405, -6.09414, 0.380692, -6.09405, 6.09524, -0.381063, -6.09405, -6.09414, 0.380692, 6.09405, 6.09524, -0.381063, 6.09405, 6.09524, 0.380692, -6.09405)
+
+[node name="Floors" instance=ExtResource("1_7xr47")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_kj7gy")
+
+[node name="Floor_A" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0178242, 0, -0.0202513)
+surface_material_override/0 = ExtResource("2_l47t3")
+surface_material_override/1 = ExtResource("3_vry55")
+
+[node name="Floor_B" parent="." index="2"]
+surface_material_override/0 = ExtResource("4_waoho")
+surface_material_override/1 = ExtResource("5_ybdhx")
+
+[node name="basic_Floor" parent="." index="3"]
+surface_material_override/1 = ExtResource("3_vry55")
+surface_material_override/2 = ExtResource("5_ybdhx")
+
+[node name="basic_Floor-convcol" parent="." index="4"]
+surface_material_override/0 = ExtResource("4_waoho")
+surface_material_override/1 = ExtResource("2_l47t3")
+surface_material_override/2 = ExtResource("5_ybdhx")
+
+[node name="basic_Floor_Z" parent="." index="5"]
+surface_material_override/0 = ExtResource("6_bk6ft")
+surface_material_override/1 = ExtResource("3_vry55")
+surface_material_override/2 = ExtResource("5_ybdhx")
+
+[node name="@StaticBody3D@56327" type="StaticBody3D" parent="basic_Floor_Z" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="basic_Floor_Z/@StaticBody3D@56327" index="0"]
+shape = SubResource("ConvexPolygonShape3D_xo3wf")
+
+[node name="Floor_C" parent="." index="6"]
+surface_material_override/0 = ExtResource("4_waoho")
+surface_material_override/1 = ExtResource("5_ybdhx")
+surface_material_override/2 = ExtResource("3_vry55")
+
+[node name="Floor_D" parent="." index="7"]
+surface_material_override/0 = ExtResource("3_vry55")
+surface_material_override/2 = ExtResource("2_l47t3")
+
+[node name="Narrow_floor_A" parent="." index="8"]
+surface_material_override/1 = ExtResource("5_ybdhx")
+surface_material_override/2 = ExtResource("3_vry55")
+
+[node name="narrow_floor_B" parent="." index="9"]
+surface_material_override/1 = ExtResource("5_ybdhx")
+surface_material_override/2 = ExtResource("3_vry55")
+
+[node name="Narrow_C" parent="." index="10"]
+surface_material_override/1 = ExtResource("5_ybdhx")
+surface_material_override/2 = ExtResource("3_vry55")
+
+[node name="Jump_Narrow" parent="." index="11"]
+surface_material_override/1 = ExtResource("5_ybdhx")
+surface_material_override/2 = ExtResource("3_vry55")

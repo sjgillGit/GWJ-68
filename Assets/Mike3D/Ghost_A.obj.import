@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://blfaqsugjm3ea"
+path="res://.godot/imported/Ghost_A.obj-4a83448ba2bad2881dd6a3a2bbd6818b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Ghost_A.obj-4a83448ba2bad2881dd6a3a2bbd6818b.mesh"]
+
+source_file="res://Assets/Mike3D/Ghost_A.obj"
+dest_files=["res://.godot/imported/Ghost_A.obj-4a83448ba2bad2881dd6a3a2bbd6818b.mesh", "res://.godot/imported/Ghost_A.obj-4a83448ba2bad2881dd6a3a2bbd6818b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

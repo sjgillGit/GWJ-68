@@ -17,6 +17,15 @@ func _ready():
 	PC_spawn_position = PLAYER.global_position
 	
 	
+	# bake navigation
+	$Geometry/Static/NaviagtionRegion.bake_navigation_mesh()
+	
+	
+	#connect signals
+	
+	#connects the player to the macguffin
+	$The_Magical_Macguffin/Macguffin_Radius.connect("body_entered", $PC._on_macguffin_radius_body_entered)
+	
 	pass # Replace with function body.
 
 
@@ -40,6 +49,6 @@ func the_overseer(delta):
 	if PLAYER.transform.origin.y < -50:
 		PLAYER.transform.origin = PC_spawn_position
 	
-	$PC/SpringArm3D/Camera3D.look_at(PLAYER.global_position)
-	
+	#$PC/SpringArm3D/Camera3D.look_at(PLAYER.global_position)
+	$Cameras/Camera3D.look_at($PC.global_position)
 	pass

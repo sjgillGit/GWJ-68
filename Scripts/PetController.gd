@@ -1,12 +1,12 @@
 extends CharacterBody3D
 
-@onready var player = $"../Player"
+@onready var player = get_tree().current_scene.get_node_or_null("PC")
 
 @onready var navAgent = $NavigationAgent3D
 
-var speed = 6
-var maxVisibility = 13
-var catchUpDistance = 5
+@export var speed = 6
+@export var catchUpDistance = 5
+@export var maxVisibility = 13
 
 var playerTooFar = false
 
@@ -37,6 +37,15 @@ func _physics_process(_delta):
 	velocity = velocity.move_toward(newVelocity, .25)
 
 	move_and_slide()
+	
+	if velocity.x or velocity.z != 0:
+		$Mouse/AnimationPlayer.play("walk")
+	else:
+		$Mouse/AnimationPlayer.play("Idle")
+	
+	look_at(player.global_position)
+	
+	pass
 	
 func updateTargetLoc(targetLoc):
 	navAgent.target_position = targetLoc

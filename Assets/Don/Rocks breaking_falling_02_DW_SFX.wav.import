@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbd84gijlklvm"
+path="res://.godot/imported/Rocks breaking_falling_02_DW_SFX.wav-b4b44d9826cde23dea733d3e2cc3c144.sample"
+
+[deps]
+
+source_file="res://Assets/Don/Rocks breaking_falling_02_DW_SFX.wav"
+dest_files=["res://.godot/imported/Rocks breaking_falling_02_DW_SFX.wav-b4b44d9826cde23dea733d3e2cc3c144.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

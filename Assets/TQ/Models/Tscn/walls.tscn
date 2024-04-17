@@ -24,7 +24,7 @@ uv1_triplanar = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y8l8d"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tyrwe"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fonhk"]
 seamless = true
 noise = SubResource("FastNoiseLite_y8l8d")
 
@@ -33,10 +33,10 @@ albedo_color = Color(0.811765, 0.690196, 0.533333, 1)
 albedo_texture = ExtResource("6_ah581")
 normal_enabled = true
 normal_texture = ExtResource("7_urogc")
-ao_texture = SubResource("NoiseTexture2D_tyrwe")
+ao_texture = SubResource("NoiseTexture2D_fonhk")
 heightmap_scale = 16.0
-heightmap_texture = SubResource("NoiseTexture2D_tyrwe")
-subsurf_scatter_texture = SubResource("NoiseTexture2D_tyrwe")
+heightmap_texture = SubResource("NoiseTexture2D_fonhk")
+subsurf_scatter_texture = SubResource("NoiseTexture2D_fonhk")
 uv1_scale = Vector3(0.05, 0.05, 0.05)
 uv1_triplanar = true
 uv1_world_triplanar = true
@@ -123,3 +123,8 @@ shape = SubResource("ConcavePolygonShape3D_u33sk")
 surface_material_override/0 = ExtResource("8_mfd12")
 surface_material_override/1 = ExtResource("10_xm8n8")
 surface_material_override/2 = ExtResource("9_ygmqj")
+
+[node name="Doorway_A" parent="." index="13"]
+surface_material_override/0 = ExtResource("8_mfd12")
+surface_material_override/1 = ExtResource("9_ygmqj")
+surface_material_override/2 = ExtResource("8_mfd12")
