@@ -68,7 +68,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3488, 0.509685, -3.86564)
 
 [node name="Obstacle" parent="." instance=ExtResource("4_ugeue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.901991, 1.56072, -4.16986)
-obstacle = true
+trap = true
+
+[node name="FailSafePos" parent="Obstacle" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.54725)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -79,3 +82,5 @@ shape = SubResource("BoxShape3D_fjmd1")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 3.38273, 0, 0, 0, 11.1544, 2.42863, 1.23087, -5.02062)
 mesh = SubResource("BoxMesh_62235")
+
+[editable path="Obstacle"]

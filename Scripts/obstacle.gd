@@ -1,14 +1,18 @@
 extends StaticBody3D
 
+# SET FAILSAFEPOS OBJECT TO BE BEYOND TRAP	
+
 @export
 var obstacle = false
 #@export
+@export
 var trap = false #Currenlty don't have checkpoints for trip to work
 @export
 var trip = false
 
 var obstacleStrength = 6
 
+@onready var failSafe = $FailSafePos
 @onready var player = $"../Player"
 
 func _on_area_3d_body_entered(body):
@@ -21,7 +25,8 @@ func _on_area_3d_body_entered(body):
 				breakObstacle()
 				player.playerStunned(2)
 		elif trap:
-			pass #Respawn Player At Checkpoint. Checkpoints dont exist yet, will wait until map is made to implement.
+			if!player.trapped:
+				player.hitTrap(failSafe.global_transform.origin) #Respawn Player At Checkpoint. Checkpoints dont exist yet, will wait until map is made to implement.
 		elif trip:
 			if speed > 5:
 				player.playerStunned(1) # Faster player is going, the more they are hindered
