@@ -14,6 +14,9 @@ const FORCE_MULTIPLIER: float = 0.001
 
 var final_speed: float = SPEED
 
+var stunned = false
+var stunAmount
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -54,7 +57,11 @@ func modify_speed_for_sprint():
 	if Input.is_action_just_released("move_sprint"):
 		final_speed = SPEED
 		
-	return final_speed
+	
+	if !stunned:
+		return final_speed
+	else:
+		return stunAmount
 	
 func apply_movement(_delta: float, direction, speed: float):
 	if direction:
@@ -87,3 +94,11 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	collide_with_rigidbodies_godot4_fix()
+
+func playerStunned(stunStrength):
+	stunAmount = stunStrength
+	print(stunAmount)
+	stunned = true
+	await get_tree().create_timer(2.5).timeout
+	stunned = false
+
