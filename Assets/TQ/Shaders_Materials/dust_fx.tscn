@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqoke261bw3op"]
+
+[ext_resource type="Texture2D" path="res://Assets/TQ/textures/Dust_A.png" id="1_tw8x4"]
+
+[sub_resource type="Gradient" id="Gradient_26k6a"]
+offsets = PackedFloat32Array(0, 0.264151, 0.59434, 1)
+colors = PackedColorArray(0.31802, 0.31802, 0.31802, 1, 0.808134, 0.808134, 0.808134, 1, 0.941176, 0.941176, 0.941176, 0.494118, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ht686"]
+gradient = SubResource("Gradient_26k6a")
+
+[sub_resource type="Curve" id="Curve_pfdlj"]
+max_value = 3.0
+_data = [Vector2(0, 0.0329671), 0.0, 1.05638, 0, 0, Vector2(0.268657, 0.626374), 0.0, 0.0, 0, 0, Vector2(0.567164, 0.395604), 1.07455, 1.07455, 0, 0, Vector2(0.813433, 0.593407), -4.08626, -4.08626, 0, 0, Vector2(1, 0.395604), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_v57vs"]
+curve = SubResource("Curve_pfdlj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s8h1g"]
+angle_min = -90.0
+angle_max = 90.0
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 1, 0)
+scale_curve = SubResource("CurveTexture_v57vs")
+color_ramp = SubResource("GradientTexture1D_ht686")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_67qft"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_tw8x4")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_d372h"]
+material = SubResource("StandardMaterial3D_67qft")
+
+[node name="Dust_FX" type="GPUParticles3D"]
+amount = 32
+explosiveness = 0.85
+process_material = SubResource("ParticleProcessMaterial_s8h1g")
+draw_pass_1 = SubResource("QuadMesh_d372h")

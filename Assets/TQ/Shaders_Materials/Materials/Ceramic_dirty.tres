@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://d24dkuqokatt6"]
+
+[sub_resource type="Gradient" id="Gradient_rgi77"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_51jto"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r46d3"]
+seamless = true
+color_ramp = SubResource("Gradient_rgi77")
+noise = SubResource("FastNoiseLite_51jto")
+
+[resource]
+albedo_color = Color(0.0470588, 0.0509804, 0.0980392, 1)
+roughness_texture = SubResource("NoiseTexture2D_r46d3")
+uv1_scale = Vector3(0.75, 0.75, 0.75)
+uv1_triplanar = true

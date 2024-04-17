@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bisjj4x0hmkky"
+path="res://.godot/imported/Humanoid_Static.obj-449eebc1bfe6d1e4427711635f4ac1ea.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Humanoid_Static.obj-449eebc1bfe6d1e4427711635f4ac1ea.mesh"]
+
+source_file="res://Assets/Mike3D/Humanoid_Static.obj"
+dest_files=["res://.godot/imported/Humanoid_Static.obj-449eebc1bfe6d1e4427711635f4ac1ea.mesh", "res://.godot/imported/Humanoid_Static.obj-449eebc1bfe6d1e4427711635f4ac1ea.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
