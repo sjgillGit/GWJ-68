@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://br77sib5i23l"]
+
+[node name="PeepingTomBase" type="Marker3D"]
+
+[node name="ThePeepingTom" type="Camera3D" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="ThePeepingTom"]

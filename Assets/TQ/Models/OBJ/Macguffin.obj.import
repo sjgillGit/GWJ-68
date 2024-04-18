@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d3mx6j6b3ru84"
+path="res://.godot/imported/Macguffin.obj-645927f2d393f9f6c643c2a31f4b5e70.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Macguffin.obj-645927f2d393f9f6c643c2a31f4b5e70.mesh"]
+
+source_file="res://Assets/TQ/Models/OBJ/Macguffin.obj"
+dest_files=["res://.godot/imported/Macguffin.obj-645927f2d393f9f6c643c2a31f4b5e70.mesh", "res://.godot/imported/Macguffin.obj-645927f2d393f9f6c643c2a31f4b5e70.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

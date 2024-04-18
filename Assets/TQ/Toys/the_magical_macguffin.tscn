@@ -1,0 +1,253 @@
+[gd_scene load_steps=20 format=3 uid="uid://fowsuu26rc46"]
+
+[ext_resource type="Shader" uid="uid://cmd077foxrq2w" path="res://Assets/TQ/Shaders_Materials/TheVoid_Shader.tres" id="1_65yak"]
+[ext_resource type="ArrayMesh" uid="uid://d3mx6j6b3ru84" path="res://Assets/TQ/Models/OBJ/Macguffin.obj" id="2_h141t"]
+[ext_resource type="Material" uid="uid://dpvdpugdhtek1" path="res://Assets/TQ/Shaders_Materials/Materials/Particle_Material.tres" id="3_tt4vm"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_44rdu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shyfb"]
+render_priority = 0
+shader = ExtResource("1_65yak")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1qh4s"]
+albedo_color = Color(0.494118, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya4qm"]
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asaq7"]
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+
+[sub_resource type="Animation" id="Animation_jc1l7"]
+resource_name = "Active"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes/0:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.0174533, 0, 0), Vector3(3.14334, 0, 0), Vector3(6.08247, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meshes/1:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.125363, 0.132099, -0.81578), Vector3(-0.122206, 3.0047, -2.29963), Vector3(0.433624, -0.505134, -0.92105)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meshes/2:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.00235367, 0.000904972, 0.723274), Vector3(0.11051, 3.04645, 2.41289), Vector3(0.558094, 0.586755, 0.89503)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OmniLight3D:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0180948, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.25, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("OmniLight3D:light_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.662745, 0.792157, 0.443137, 1), Color(0, 0.815686, 1, 1), Color(0.662745, 0.792157, 0.443137, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lof2o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes/0:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meshes/1:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.125363, 0.132099, -0.81578)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meshes/2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.00235367, 0.000904972, 0.723274)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OmniLight3D:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("OmniLight3D:light_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.662745, 0.792157, 0.443137, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wp80m"]
+_data = {
+"Active": SubResource("Animation_jc1l7"),
+"RESET": SubResource("Animation_lof2o")
+}
+
+[sub_resource type="FogMaterial" id="FogMaterial_cisxu"]
+edge_fade = 1.83792
+
+[sub_resource type="Gradient" id="Gradient_nox0r"]
+offsets = PackedFloat32Array(0, 0.471698, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qqpfi"]
+gradient = SubResource("Gradient_nox0r")
+
+[sub_resource type="Curve" id="Curve_txmmw"]
+_data = [Vector2(0, 0.208791), 0.0, 0.0, 0, 0, Vector2(0.425373, 0.483516), 0.0, 0.0, 0, 0, Vector2(0.746269, 0.373626), 0.0, 0.0, 0, 0, Vector2(1, 0.175824), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_thos4"]
+curve = SubResource("Curve_txmmw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_blr8e"]
+emission_shape = 1
+emission_sphere_radius = 6.0
+angle_min = -90.0
+angle_max = 90.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_thos4")
+color = Color(0.368627, 0.501961, 1, 1)
+color_ramp = SubResource("GradientTexture1D_qqpfi")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ocfjo"]
+material = ExtResource("3_tt4vm")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btm0o"]
+size = Vector3(4, 4, 4)
+
+[node name="The_Magical_Macguffin" type="Node3D"]
+
+[node name="Meshes" type="Node3D" parent="."]
+
+[node name="Core" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(0.698144, 0, 0, 0, 0.698144, 0, 0, 0, 0.698144, 0, 0.94982, 0)
+mesh = SubResource("SphereMesh_44rdu")
+surface_material_override/0 = SubResource("ShaderMaterial_shyfb")
+
+[node name="0" type="Marker3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.984151, 0)
+
+[node name="Macguffin" type="MeshInstance3D" parent="Meshes/0"]
+transform = Transform3D(-0.0199652, 0, -0.999801, 0, 1, 0, 0.999801, 0, -0.0199652, 0, 0.514802, 0)
+mesh = ExtResource("2_h141t")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_1qh4s")
+
+[node name="1" type="Marker3D" parent="Meshes"]
+transform = Transform3D(0.691324, 0.710629, 0.130682, -0.722546, 0.679922, 0.125035, 1.49012e-07, -0.180863, 0.983509, 0, 0.984151, 0)
+
+[node name="Macguffin2" type="MeshInstance3D" parent="Meshes/1"]
+transform = Transform3D(0.0140788, -0.106682, 0.994193, -0.0141562, -0.994214, -0.106484, 0.999801, -0.0125748, -0.0155076, -0.0413513, -0.693527, -0.0102654)
+mesh = ExtResource("2_h141t")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ya4qm")
+
+[node name="2" type="Marker3D" parent="Meshes"]
+transform = Transform3D(0.749641, -0.661844, 0.00090497, 0.661841, 0.749641, 0.00235367, -0.00223616, -0.00116546, 0.999997, 0, 0.984151, 0)
+
+[node name="Macguffin3" type="MeshInstance3D" parent="Meshes/2"]
+transform = Transform3D(0.00904384, 0.14314, -0.989661, -0.0141562, -0.989584, -0.143259, -0.999859, 0.0153054, -0.00692332, 0.136276, -0.672821, 0.00199127)
+mesh = ExtResource("2_h141t")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_asaq7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wp80m")
+}
+autoplay = "Active"
+speed_scale = 0.75
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.973562, 0)
+size = Vector3(5, 5, 5)
+material = SubResource("FogMaterial_cisxu")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0227203, 0.944119, 0)
+light_color = Color(0.662745, 0.792157, 0.443137, 1)
+
+[node name="SparklesFX" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.961623, 0)
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_blr8e")
+draw_pass_1 = SubResource("QuadMesh_ocfjo")
+
+[node name="Macguffin_Radius" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Macguffin_Radius"]
+shape = SubResource("BoxShape3D_btm0o")

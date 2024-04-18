@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpna23eigugeq"]
+
+[ext_resource type="PackedScene" uid="uid://64ctpwbo0tw5" path="res://Assets/Mike3D/Mr_Thumper.glb" id="1_h5g67"]
+
+[node name="Mr_Thumper" instance=ExtResource("1_h5g67")]
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(-0.232815, 0, -2.03533e-08, 0, 0.232815, 0, 2.03533e-08, 0, -0.232815, 0, 0.350677, 0.0712006)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/3/rotation = Quaternion(0.131373, -0.163077, -0.613433, 0.761477)
+bones/4/rotation = Quaternion(0.537895, 0.174772, -0.442202, 0.696118)
+bones/5/rotation = Quaternion(-0.00164085, 0.0229609, 0.0243803, 0.999438)
+bones/8/rotation = Quaternion(0.192807, 0.307461, 0.491426, 0.791703)
+bones/9/rotation = Quaternion(0.0315964, 0.118049, 0.217109, 0.968468)
+bones/10/rotation = Quaternion(0.302461, -0.495607, 0.447871, 0.679929)
+bones/11/rotation = Quaternion(0.0479969, 0.800015, 0.232417, 0.551049)
+bones/12/rotation = Quaternion(-0.0556031, -0.316858, 0.297789, 0.898794)
+bones/14/rotation = Quaternion(0.168371, 0, 4.01428e-08, 0.985724)
+bones/33/rotation = Quaternion(0.293403, -0.0213814, 0.34295, 0.8921)
+bones/45/rotation = Quaternion(-0.959339, -0.129049, 0.0649513, 0.24248)
+bones/46/rotation = Quaternion(0.0822761, 0.0780732, 0.123332, 0.985862)
+bones/47/rotation = Quaternion(0.0790539, 0.0248528, 0.101486, 0.99138)
+bones/50/rotation = Quaternion(-0.778131, 0.0166948, 0.0134684, 0.627736)
