@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://carr70jm4uxjk"]
 
 [ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="1_30q8v"]
-[ext_resource type="PackedScene" uid="uid://b4dwd2ilknvic" path="res://Scenes/character_portrait.tscn" id="1_x3t0a"]
+[ext_resource type="PackedScene" uid="uid://b4dwd2ilknvic" path="res://Scenes/Menus/character_portrait.tscn" id="1_x3t0a"]
 
 [node name="CharacterListContainer" type="PanelContainer"]
 anchors_preset = 8
