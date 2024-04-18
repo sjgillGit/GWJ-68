@@ -1,16 +1,20 @@
 extends CharacterBody3D
 
-@onready var player = get_tree().current_scene.get_node_or_null("PC")
+@onready var player = $"../Player"
 
 @onready var navAgent = $NavigationAgent3D
 
-@export var speed = 6
-@export var catchUpDistance = 5
-@export var maxVisibility = 13
+var speed = 6
+var maxVisibility = 13
+var catchUpDistance = 5
 
 var playerTooFar = false
 
 var currentlyIdle = false
+
+func _ready():
+	if player == null:
+		print("Make Sure Path to Player is Correct")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
@@ -37,15 +41,6 @@ func _physics_process(_delta):
 	velocity = velocity.move_toward(newVelocity, .25)
 
 	move_and_slide()
-	
-	if velocity.x or velocity.z != 0:
-		$Mouse/AnimationPlayer.play("walk")
-	else:
-		$Mouse/AnimationPlayer.play("Idle")
-	
-	look_at(player.global_position)
-	
-	pass
 	
 func updateTargetLoc(targetLoc):
 	navAgent.target_position = targetLoc
