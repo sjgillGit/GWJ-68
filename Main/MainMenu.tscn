@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://chtvgyugi6onh"]
+[gd_scene load_steps=6 format=3 uid="uid://chtvgyugi6onh"]
 
 [ext_resource type="Texture2D" uid="uid://dlmqmynnd4jtg" path="res://Assets/TitleCAAARD_TEST_B.png" id="1_4r4wi"]
+[ext_resource type="Script" path="res://Main/MainMenu.gd" id="1_aqhaj"]
 [ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="3_6wwhn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5gu3s"]
@@ -20,7 +21,10 @@ shadow_color = Color(0.564706, 0.564706, 0.564706, 0.6)
 shadow_size = 3
 shadow_offset = Vector2(0, 1.03)
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_aqhaj")
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(575, 323)
@@ -83,7 +87,7 @@ text = "Play"
 icon_alignment = 1
 
 [node name="Control" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
