@@ -7,7 +7,6 @@
 [sub_resource type="BoxMesh" id="BoxMesh_twswv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q1lsk"]
-size = Vector3(1.2168, 1.1778, 1.23853)
 
 [node name="Obstacle" type="StaticBody3D"]
 script = ExtResource("1_xf00s")
@@ -21,10 +20,7 @@ mesh = SubResource("BoxMesh_twswv")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00123703, -0.0222046, 0.0188793)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.204497)
 shape = SubResource("BoxShape3D_q1lsk")
-
-[node name="FailSafePos" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.93019)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
