@@ -1,0 +1,365 @@
+[gd_scene load_steps=12 format=3 uid="uid://ej4n0fxqou5e"]
+
+[ext_resource type="Script" path="res://Scripts/UI/PauseScreen.gd" id="1_i3qcy"]
+[ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="2_thqxy"]
+[ext_resource type="FontFile" uid="uid://by6ohp3k752qm" path="res://Fonts/SortsMillGoudy-Regular.ttf" id="3_h1a1d"]
+[ext_resource type="Script" path="res://Scripts/UI/ResumeButton.gd" id="4_nwvic"]
+[ext_resource type="Script" path="res://Scripts/UI/SettingsButton.gd" id="5_qpgae"]
+[ext_resource type="Script" path="res://Scripts/UI/Audio.gd" id="6_juy3y"]
+[ext_resource type="Script" path="res://Scripts/UI/BackButton.gd" id="7_lknmp"]
+[ext_resource type="Script" path="res://Scripts/UI/Video.gd" id="8_1fnsx"]
+[ext_resource type="PackedScene" uid="uid://w0kjvjd7ycqi" path="res://Scenes/action_button.tscn" id="9_eq8lk"]
+[ext_resource type="Script" path="res://Scripts/UI/DefaultButton.gd" id="10_nujoc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p640l"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="PauseScreen" type="Node2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("1_i3qcy")
+
+[node name="bg" type="ColorRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.345098)
+
+[node name="PauseLabel" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_top = 34.48
+offset_right = 48.0
+offset_bottom = 81.4801
+grow_horizontal = 2
+theme = ExtResource("2_thqxy")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("3_h1a1d")
+theme_override_font_sizes/font_size = 32
+text = "Paused"
+
+[node name="PauseMenu" type="VBoxContainer" parent="UI"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(200, 0)
+offset_left = 541.0
+offset_top = 272.0
+offset_right = 605.0
+offset_bottom = 376.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme = ExtResource("2_thqxy")
+
+[node name="ResumeButton" type="Button" parent="UI/PauseMenu"]
+layout_mode = 2
+text = "Resume"
+script = ExtResource("4_nwvic")
+
+[node name="SettingsButton" type="Button" parent="UI/PauseMenu"]
+layout_mode = 2
+text = "Settings"
+script = ExtResource("5_qpgae")
+
+[node name="QuitButton" type="Button" parent="UI/PauseMenu"]
+layout_mode = 2
+text = "Quit"
+
+[node name="SettingsPanelContainer" type="PanelContainer" parent="UI"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(156, 156)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p640l")
+
+[node name="Settings" type="TabContainer" parent="UI/SettingsPanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_thqxy")
+tab_alignment = 1
+current_tab = 1
+
+[node name="Audio" type="TabBar" parent="UI/SettingsPanelContainer/Settings"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_thqxy")
+script = ExtResource("6_juy3y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/SettingsPanelContainer/Settings/Audio"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.5
+offset_top = -38.5
+offset_right = 79.5
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Master"
+
+[node name="MusicLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music"
+
+[node name="SFXLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="MasterHSlider" type="HSlider" parent="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="MusicHSlider" type="HSlider" parent="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXHSlider" type="HSlider" parent="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="BackButton" type="Button" parent="UI/SettingsPanelContainer/Settings/Audio"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = -21.0
+offset_top = -32.0
+offset_right = 21.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back"
+script = ExtResource("7_lknmp")
+
+[node name="Video" type="TabBar" parent="UI/SettingsPanelContainer/Settings"]
+layout_mode = 2
+theme = ExtResource("2_thqxy")
+script = ExtResource("8_1fnsx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/SettingsPanelContainer/Settings/Video"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -44.0
+offset_right = 95.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SettingsPanelContainer/Settings/Video/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="FullScreenLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Video/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Full Screen"
+
+[node name="BorderlessLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Video/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Borderless"
+
+[node name="VSyncLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Video/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "VSync"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/SettingsPanelContainer/Settings/Video/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="UI/SettingsPanelContainer/Settings/Video/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="BorderlessCheckBox2" type="CheckBox" parent="UI/SettingsPanelContainer/Settings/Video/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="VSyncButton" type="OptionButton" parent="UI/SettingsPanelContainer/Settings/Video/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "Enabled"
+popup/item_0/id = 0
+popup/item_1/text = "Adaptive"
+popup/item_1/id = 2
+popup/item_2/text = "Mailbox"
+popup/item_2/id = 3
+popup/item_3/text = "Disabled"
+popup/item_3/id = 0
+
+[node name="BackButton" type="Button" parent="UI/SettingsPanelContainer/Settings/Video"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = -21.0
+offset_top = -32.0
+offset_right = 21.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back"
+script = ExtResource("7_lknmp")
+
+[node name="Controls" type="TabBar" parent="UI/SettingsPanelContainer/Settings"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_thqxy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/SettingsPanelContainer/Settings/Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -68.0
+offset_right = 62.5
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer"]
+layout_mode = 2
+
+[node name="MoveUpLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Move up"
+
+[node name="MoveDownLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Move down"
+
+[node name="MoveLeftLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Move left"
+
+[node name="MoveRightLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Move right"
+
+[node name="AbilityLabel" type="Label" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Ability"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="ActionButton" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("9_eq8lk")]
+layout_mode = 2
+size_flags_vertical = 7
+
+[node name="ActionButton2" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("9_eq8lk")]
+layout_mode = 2
+size_flags_vertical = 7
+action = "ui_down"
+
+[node name="ActionButton3" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("9_eq8lk")]
+layout_mode = 2
+size_flags_vertical = 7
+action = "ui_left"
+
+[node name="ActionButton4" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("9_eq8lk")]
+layout_mode = 2
+size_flags_vertical = 7
+action = "ui_right"
+
+[node name="ActionButton5" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("9_eq8lk")]
+layout_mode = 2
+size_flags_vertical = 7
+action = "ui_select"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/SettingsPanelContainer/Settings/Controls"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = -53.0
+offset_top = -40.0
+offset_right = 53.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BackButton" type="Button" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer2"]
+layout_mode = 2
+text = "Back"
+script = ExtResource("7_lknmp")
+
+[node name="DefaultButton" type="Button" parent="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer2"]
+layout_mode = 2
+text = "Default"
+script = ExtResource("10_nujoc")
+
+[connection signal="visibility_changed" from="UI/PauseMenu" to="UI/PauseMenu/ResumeButton" method="_on_pause_menu_visibility_changed"]
+[connection signal="pressed" from="UI/PauseMenu/ResumeButton" to="UI" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/SettingsButton" to="UI/PauseMenu/SettingsButton" method="_on_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/QuitButton" to="UI" method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer/VBoxContainer2/MasterHSlider" to="UI/SettingsPanelContainer/Settings/Audio" method="_on_master_h_slider_value_changed"]
+[connection signal="value_changed" from="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer/VBoxContainer2/MusicHSlider" to="UI/SettingsPanelContainer/Settings/Audio" method="_on_music_h_slider_value_changed"]
+[connection signal="value_changed" from="UI/SettingsPanelContainer/Settings/Audio/HBoxContainer/VBoxContainer2/SFXHSlider" to="UI/SettingsPanelContainer/Settings/Audio" method="_on_sfxh_slider_value_changed"]
+[connection signal="pressed" from="UI/SettingsPanelContainer/Settings/Audio/BackButton" to="UI/SettingsPanelContainer/Settings/Audio/BackButton" method="_on_pressed"]
+[connection signal="toggled" from="UI/SettingsPanelContainer/Settings/Video/HBoxContainer/VBoxContainer2/FullscreenCheckBox" to="UI/SettingsPanelContainer/Settings/Video" method="_on_fullscreen_check_box_toggled"]
+[connection signal="toggled" from="UI/SettingsPanelContainer/Settings/Video/HBoxContainer/VBoxContainer2/BorderlessCheckBox2" to="UI/SettingsPanelContainer/Settings/Video" method="_on_borderless_check_box_2_toggled"]
+[connection signal="item_selected" from="UI/SettingsPanelContainer/Settings/Video/HBoxContainer/VBoxContainer2/VSyncButton" to="UI/SettingsPanelContainer/Settings/Video" method="_on_v_sync_button_item_selected"]
+[connection signal="pressed" from="UI/SettingsPanelContainer/Settings/Video/BackButton" to="UI/SettingsPanelContainer/Settings/Video/BackButton" method="_on_pressed"]
+[connection signal="pressed" from="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer2/BackButton" to="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer2/BackButton" method="_on_pressed"]
+[connection signal="pressed" from="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer2/DefaultButton" to="UI/SettingsPanelContainer/Settings/Controls/HBoxContainer2/DefaultButton" method="_on_pressed"]

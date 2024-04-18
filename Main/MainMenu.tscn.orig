@@ -1,8 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://chtvgyugi6onh"]
+<<<<<<< HEAD
+[gd_scene load_steps=5 format=3 uid="uid://bd76477svul42"]
+
+[ext_resource type="Texture2D" uid="uid://dlmqmynnd4jtg" path="res://Assets/TitleCAAARD_TEST_B.png" id="1_4r4wi"]
+[ext_resource type="Theme" uid="uid://c127lo03d7ash" path="res://Assets/new_theme.tres" id="3_6wwhn"]
+=======
+[gd_scene load_steps=6 format=3 uid="uid://chtvgyugi6onh"]
 
 [ext_resource type="Texture2D" uid="uid://dlmqmynnd4jtg" path="res://Assets/TitleCAAARD_TEST_B.png" id="1_4r4wi"]
 [ext_resource type="Script" path="res://Main/MainMenu.gd" id="1_aqhaj"]
 [ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="3_6wwhn"]
+>>>>>>> 9f4a919c54f978e5f25ffbdd16e1a383c224ac79
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5gu3s"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
