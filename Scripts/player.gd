@@ -14,11 +14,23 @@ const FORCE_MULTIPLIER: float = 0.001
 
 var final_speed: float = SPEED
 
+var stunned = false
+var stunAmount
+
+var trapped = false
+var trappedAmount = 0
+var getPositions = false
+var oldPos : Vector3
+var newPos : Vector3
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
+	trappedAmount = 0
 	final_speed = SPEED
+	getPositions = true
+	getOldPositions()
 	
 func _get_current_camera():
 	return get_viewport().get_camera_3d()
@@ -54,7 +66,11 @@ func modify_speed_for_sprint():
 	if Input.is_action_just_released("move_sprint"):
 		final_speed = SPEED
 		
-	return final_speed
+	
+	if !stunned:
+		return final_speed
+	else:
+		return stunAmount
 	
 func apply_movement(_delta: float, direction, speed: float):
 	if direction:
@@ -75,15 +91,48 @@ func collide_with_rigidbodies_godot4_fix():
 			other_body.apply_impulse(-collision.get_normal() * apply_force)
 
 func _physics_process(delta):
-	process_gravity(delta)
 	
-	handle_jump_input()
+	if !trapped:
+		process_gravity(delta)
+		
+		handle_jump_input()
 
-	var direction = calculate_final_direction(_get_current_camera())
-	var speed = modify_speed_for_sprint()
-	
-	#if is_on_floor():
-	apply_movement(delta, direction, speed)
-	
-	move_and_slide()
-	collide_with_rigidbodies_godot4_fix()
+		var direction = calculate_final_direction(_get_current_camera())
+		var speed = modify_speed_for_sprint()
+		
+		#if is_on_floor():
+		apply_movement(delta, direction, speed)
+		
+		move_and_slide()
+		collide_with_rigidbodies_godot4_fix()
+
+func playerStunned(stunStrength):
+	stunAmount = stunStrength
+	print(stunAmount)
+	stunned = true
+	await get_tree().create_timer(2.5).timeout
+	stunned = false
+
+func getOldPositions():
+	while getPositions == true:
+		oldPos = newPos
+		newPos = global_transform.origin
+		await get_tree().create_timer(2.5).timeout
+		
+func hitTrap(failSafePos):
+	if trappedAmount < 3:
+		trapped = true
+		hide()
+		await get_tree().create_timer(2.5).timeout
+		global_transform.origin = oldPos
+		show()
+		trappedAmount += 1
+		trapped = false
+	else:
+		trapped = true
+		hide()
+		await get_tree().create_timer(2).timeout
+		global_transform.origin = failSafePos
+		show()
+		trapped = false
+		#Take Player to Object Position which should be set past trap - Maybe show message

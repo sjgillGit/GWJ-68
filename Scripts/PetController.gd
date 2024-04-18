@@ -12,6 +12,10 @@ var playerTooFar = false
 
 var currentlyIdle = false
 
+func _ready():
+	if player == null:
+		print("Make Sure Path to Player is Correct")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	
