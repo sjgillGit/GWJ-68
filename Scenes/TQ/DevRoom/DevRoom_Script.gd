@@ -2,7 +2,7 @@ extends Node3D
 class_name TQ_Dev_Room
 ##@experimental
 
-## (ノಠ益ಠ)ノ彡┻━┻ fuck this job V.0.2.0
+## (ノಠ益ಠ)ノ彡┻━┻ fuck this job V.0.2.3
 
 @export_enum("Le_Mouse", "Ink_Blot", "Murder_Of_Crows", "Skater_Knight") var PLAYER_CLASS
 @onready var class_id
@@ -11,9 +11,16 @@ class_name TQ_Dev_Room
 
 var PC_spawn_position: Vector3
 
+var current_cam: Camera3D 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$PC/Locator_HIDEME.visible = false
+	current_cam = $Cameras/Cam0
+	current_cam.current = true
+	
+	$Pet.visible = false
+	
+	#$PC/Locator_HIDEME.visible = false
 	PC_spawn_position = PLAYER.global_position
 	
 	
@@ -24,8 +31,8 @@ func _ready():
 	#connect signals
 	
 	#connects the player to the macguffin
-	$The_Magical_Macguffin/Macguffin_Radius.connect("body_entered", $PC._on_macguffin_radius_body_entered)
-	
+	$The_Magical_Macguffin/Macguffin_Radius.connect("body_entered", PLAYER._on_macguffin_radius_body_entered)
+	PLAYER.connect('end_game', end_game)
 	pass # Replace with function body.
 
 
@@ -46,9 +53,50 @@ func time_of_day():
 
 func the_overseer(delta):
 	
-	if PLAYER.transform.origin.y < -50:
+	if PLAYER.transform.origin.y < -20:
 		PLAYER.transform.origin = PC_spawn_position
+		PLAYER.class_id = 4
+		PLAYER.PC_Lose()
 	
 	#$PC/SpringArm3D/Camera3D.look_at(PLAYER.global_position)
-	$Cameras/Camera3D.look_at($PC.global_position)
+	current_cam.look_at(PLAYER.global_position)
 	pass
+
+func switch_cam():
+	current_cam.current = false
+	current_cam = $Cameras/Cam0
+	current_cam.current = true
+	pass
+
+func end_game():
+	current_cam.current = false
+	current_cam = $The_Magical_Macguffin/Cam_orbit_point/GuffCam
+	current_cam.current = true
+	
+	pass
+
+
+func _on_cam_trigger_0_body_entered(body):
+	if body.is_in_group("Player"):
+		current_cam.current = false
+		current_cam = $Cameras/Cam1
+		current_cam.is_current_cam = true
+		current_cam.current = true
+	pass # Replace with function body.
+
+
+func _on_cam_trigger_0_body_exited(body):
+	
+	current_cam = $PC/SpringArm3D/Player_cam
+	#current_cam.is_current_cam = true
+	current_cam.current = true
+	
+	pass # Replace with function body.
+
+
+func _on_cam_trigger_1_body_entered(body):
+	if body.is_in_group("Player"):
+		current_cam.current = false
+		current_cam = $Cameras/Cam2
+		current_cam.current = true
+	pass # Replace with function body.

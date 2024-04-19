@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://h4nfuyqd515d"]
+
+[ext_resource type="Script" path="res://Assets/TQ/MainMenu_Scipt.gd" id="1_bih4m"]
+[ext_resource type="PackedScene" path="res://Scenes/settings_menu.tscn" id="2_rnmcf"]
+[ext_resource type="Texture2D" uid="uid://dlmqmynnd4jtg" path="res://Assets/TitleCAAARD_TEST_B.png" id="3_akfm2"]
+[ext_resource type="Theme" uid="uid://c127lo03d7ash" path="res://Assets/new_theme.tres" id="4_mpn6k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5gu3s"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0w5m"]
+content_margin_top = 6.0
+bg_color = Color(0.027451, 0.0235294, 0, 1)
+border_width_bottom = 5
+border_color = Color(0.207843, 0.207843, 0.207843, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.564706, 0.564706, 0.564706, 0.6)
+shadow_size = 3
+shadow_offset = Vector2(0, 1.03)
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_bih4m")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsMenu" parent="." instance=ExtResource("2_rnmcf")]
+visible = false
+offset_left = 581.0
+offset_top = 279.0
+offset_right = 581.0
+offset_bottom = 279.0
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BG" type="Sprite2D" parent="Main"]
+position = Vector2(575, 323)
+scale = Vector2(0.315, 0.315)
+texture = ExtResource("3_akfm2")
+
+[node name="ButtonsContainer" type="PanelContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 945.0
+offset_top = 466.0
+offset_right = 1060.0
+offset_bottom = 498.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5gu3s")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/ButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SettingsButton" type="Button" parent="Main/ButtonsContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("4_mpn6k")
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="Main/ButtonsContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("4_mpn6k")
+text = "Quit"
+
+[node name="PlayButton" type="Button" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 473.857
+offset_top = 478.884
+offset_right = 638.142
+offset_bottom = 519.885
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_mpn6k")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_d0w5m")
+text = "Play"
+icon_alignment = 1
+
+[node name="MenuCam" type="Camera2D" parent="."]
+position = Vector2(571, 324)
+
+[connection signal="pressed" from="Main/ButtonsContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+
+[editable path="SettingsMenu"]
+[editable path="SettingsMenu/PanelContainer/MarginContainer/TabContainer/Audio/MarginContainer/AudioSettings"]

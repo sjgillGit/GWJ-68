@@ -28,14 +28,15 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @export_enum("Rodent", "Ink_Blot", "Murder_Of_Crows", "Skater_Knight", "Main_Character") var class_id = 0
 
+signal end_game
 
 
 func _ready():
 	add_to_group("Player")
 	generate_player_Mesh_and_anims()
+	connect_ui_signals()
 	
-	
-	
+	PlayerClassStats.class_id = class_id
 	pass
 
 
@@ -94,6 +95,12 @@ func _physics_process(delta):
 
 func _input(event):
 	
+	
+	if Input.is_action_just_pressed('Pause'):
+		process_mode = Node.PROCESS_MODE_ALWAYS
+		toggle_pause()
+	
+	
 	if Input.is_action_just_pressed("Skill"):
 		match class_id:
 			0:# Rodent
@@ -126,6 +133,14 @@ func _input(event):
 	pass
 
 
+func connect_ui_signals():
+	$Player_UI/CharacterSelect.connect('character_selected', generate_player_Mesh_and_anims)
+	$Player_UI/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/QuitButton.connect('pressed', quit_to_main)
+	$Player_UI/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/PauseButton.connect('pressed', toggle_pause)
+	pass
+
+
+
 func generate_player_Mesh_and_anims():
 	
 	#generate_Player character
@@ -133,7 +148,7 @@ func generate_player_Mesh_and_anims():
 	var model_i = model_p
 	
 	
-	match class_id:
+	match PlayerClassStats.class_id:
 		0:
 			var pet_p = load("res://Assets/Mike3D/mouse.tscn")
 			var pet_i = pet_p.instantiate()
@@ -165,6 +180,9 @@ func generate_player_Mesh_and_anims():
 	print(str(class_id))
 	# ENDBLOCK
 	
+	for child in get_children():
+		print(str(child))
+	
 	pass
 
 
@@ -174,6 +192,33 @@ func animation_manager(delta):
 	
 	pass
 
+func on_death_character_select():
+	
+	get_tree().paused = true
+	$Player_UI/CharacterSelect.visible = true
+	
+	pass
+
+#func character_select():
+	#
+	#get_tree().paused = true
+	#$Player_UI/CharacterSelect.visible = true
+	#
+	#pass
+
+func toggle_pause(): ## make sure pause is invisible on ready
+	var pause_menu = $Player_UI/PauseMenu
+	
+	match pause_menu.visible:
+		true:
+			pause_menu.visible = false
+			get_tree().paused = false
+		false:
+			get_tree().paused = true
+			pause_menu.visible = true
+	
+	print("toggled")
+	pass
 
 
 func _on_macguffin_radius_body_entered(body):
@@ -181,10 +226,46 @@ func _on_macguffin_radius_body_entered(body):
 	if body.is_in_group("Player"):
 		if body.class_id != 4:
 			body.transform.origin = get_tree().current_scene.PC_spawn_position
+			
 			print("you are not the hero")
 		else:
+			var MM_P = load("res://Main/MainMenu.tscn") ##main menu path
 			# Animation / Fx / sounds / music Boosh boosh boosh 
 			# you win
+			emit_signal("end_game")
+			$Player_UI/You_Won.visible = true
+			get_tree().paused = true
+			if PROCESS_MODE_WHEN_PAUSED:
+				await (get_tree().create_timer(15.0).timeout)
+				get_tree().paused = false
+				get_tree().change_scene_to_packed(MM_P)
 			print("You have destroyed the macguffin")
 	
+	
 	pass # Replace with function body.
+
+
+func toggle_settings():
+	var settingsM_p = $Player_UI/SettingsMenu
+	
+	if settingsM_p.visible:
+		#$Main.visible = true
+		settingsM_p.visible = false
+	else:
+		settingsM_p.visible = true
+		#$Main.visible = false
+	
+	print("settings menu toggled")
+	pass
+
+
+func PC_Lose():
+	on_death_character_select()
+	pass
+
+
+func quit_to_main():
+	var MM_P = preload("res://Scripts/TQ/Integrated_MainMenu.tscn")  ## main menu with buttons
+	
+	get_tree().change_scene_to_packed(MM_P)
+	pass

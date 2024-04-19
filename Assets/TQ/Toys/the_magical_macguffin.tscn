@@ -1,8 +1,25 @@
-[gd_scene load_steps=20 format=3 uid="uid://fowsuu26rc46"]
+[gd_scene load_steps=21 format=3 uid="uid://fowsuu26rc46"]
 
 [ext_resource type="Shader" uid="uid://cmd077foxrq2w" path="res://Assets/TQ/Shaders_Materials/TheVoid_Shader.tres" id="1_65yak"]
 [ext_resource type="ArrayMesh" uid="uid://d3mx6j6b3ru84" path="res://Assets/TQ/Models/OBJ/Macguffin.obj" id="2_h141t"]
 [ext_resource type="Material" uid="uid://dpvdpugdhtek1" path="res://Assets/TQ/Shaders_Materials/Materials/Particle_Material.tres" id="3_tt4vm"]
+
+[sub_resource type="GDScript" id="GDScript_7dm3u"]
+resource_name = "Macguffin_Script"
+script/source = "@tool
+extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	$Cam_orbit_point.rotate_y(0.01)
+	pass
+"
 
 [sub_resource type="SphereMesh" id="SphereMesh_44rdu"]
 
@@ -190,6 +207,8 @@ material = ExtResource("3_tt4vm")
 size = Vector3(4, 4, 4)
 
 [node name="The_Magical_Macguffin" type="Node3D"]
+process_mode = 3
+script = SubResource("GDScript_7dm3u")
 
 [node name="Meshes" type="Node3D" parent="."]
 
@@ -251,3 +270,10 @@ draw_pass_1 = SubResource("QuadMesh_ocfjo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Macguffin_Radius"]
 shape = SubResource("BoxShape3D_btm0o")
+
+[node name="Cam_orbit_point" type="Marker3D" parent="."]
+process_mode = 2
+
+[node name="GuffCam" type="Camera3D" parent="Cam_orbit_point"]
+transform = Transform3D(1, 0, 0, 0, 0.786245, 0.617914, 0, -0.617914, 0.786245, 0, 4.47192, 4)
+current = true

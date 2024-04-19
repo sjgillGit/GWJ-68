@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://bjq38y0aku672"]
+
+[ext_resource type="Texture2D" uid="uid://cqaogr15xqdcv" path="res://Assets/TQ/textures/BoomA.png" id="1_kod7g"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rvmae"]
+top_radius = 0.08
+bottom_radius = 0.08
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ci5yg"]
+albedo_color = Color(0.4, 0.14902, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_bl2kw"]
+offsets = PackedFloat32Array(0.198113, 0.396226, 0.716981, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.429259, 0.0482506, 0, 1, 0.305882, 0.188235, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_at28v"]
+gradient = SubResource("Gradient_bl2kw")
+
+[sub_resource type="Curve" id="Curve_8d5gn"]
+_data = [Vector2(0, 0.197802), 0.0, 0.0, 0, 0, Vector2(0.522388, 0.791209), 0.0, 0.0, 0, 0, Vector2(1, 0.351648), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_84fbc"]
+curve = SubResource("Curve_8d5gn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lhr3u"]
+angle_min = -90.0
+angle_max = 90.0
+gravity = Vector3(0, 9.8, 0)
+scale_curve = SubResource("CurveTexture_84fbc")
+color_ramp = SubResource("GradientTexture1D_at28v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6ooi"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_kod7g")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_1yju7"]
+material = SubResource("StandardMaterial3D_y6ooi")
+
+[node name="Wall_Torch" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 227.224, 3.04822, 6.70797)
+
+[node name="TorchLight" type="OmniLight3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.674972, -0.737843, 0, 0.737843, 0.674972, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rvmae")
+skeleton = NodePath("../TorchLight")
+surface_material_override/0 = SubResource("StandardMaterial3D_ci5yg")
+
+[node name="FireFX" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.396729, 0.278133, 0)
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_lhr3u")
+draw_pass_1 = SubResource("QuadMesh_1yju7")

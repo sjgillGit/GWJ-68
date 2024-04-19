@@ -1,9 +1,94 @@
-[gd_scene load_steps=4 format=3 uid="uid://cljkiwq1p2wby"]
+[gd_scene load_steps=14 format=3 uid="uid://cljkiwq1p2wby"]
 
 [ext_resource type="Script" path="res://Assets/TQ/Toys/pc_scipt.gd" id="1_jalcd"]
 [ext_resource type="AudioStream" uid="uid://cri0eyoxdfkxg" path="res://Assets/Don/Foot steps_01_DW_SFX.wav" id="2_e36rl"]
+[ext_resource type="Theme" uid="uid://c127lo03d7ash" path="res://Assets/new_theme.tres" id="3_te7ic"]
+[ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="4_rjgso"]
+[ext_resource type="PackedScene" path="res://Scenes/audio_settings.tscn" id="5_0g370"]
+[ext_resource type="PackedScene" path="res://Scenes/input_settings.tscn" id="6_qclvu"]
+[ext_resource type="PackedScene" uid="uid://d0m2bpk5v14oc" path="res://Scenes/character_list.tscn" id="7_jss1m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gwn5r"]
+
+[sub_resource type="GDScript" id="GDScript_8g1tb"]
+resource_name = "Player_UI"
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waenv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfkcl"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="GDScript" id="GDScript_8j5ip"]
+resource_name = "Character_select_Script"
+script/source = "extends Control
+class_name TQ_UI_Build
+##@experimental
+
+## I hate buttons, but i be lying if I didnt say these are the best looking buttons ive ever seen
+
+var class_id: int
+@onready var char_select_ui = $\".\" # (e_e ) whatever, its a path
+@onready var rodent_char = $MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer/CharacterListContainer/MarginContainer/ScrollContainer/VBoxContainer/TheRodent_Portait/Button
+@onready var ink_char = $MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer/CharacterListContainer/MarginContainer/ScrollContainer/VBoxContainer/Ink/Button2
+
+@onready var select_button = $MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer/SelectButton
+
+signal character_selected
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	#PlayerClassStats.class_id = class_id
+	
+	connect_ui_signals()
+	pass # Replace with function body.
+
+
+func connect_ui_signals():
+	
+	rodent_char.connect('pressed', rodent)
+	ink_char.connect('pressed', ink_selected)
+	
+	select_button.connect('pressed', hide_char_select)
+	#char_select_ui
+	pass
+
+
+func ink_selected():
+	PlayerClassStats.class_id = 1
+	pass
+
+
+func rodent():
+	PlayerClassStats.class_id = 0
+	pass
+
+
+func show_char_select():
+	visible = true
+	pass
+
+
+func hide_char_select():
+	emit_signal('character_selected')
+	PlayerClassStats.class_id = class_id
+	visible = false
+	get_tree().paused = false
+	pass
+"
+
+[sub_resource type="Theme" id="Theme_srcbl"]
 
 [node name="PC" type="CharacterBody3D"]
 script = ExtResource("1_jalcd")
@@ -21,3 +106,274 @@ radius = 6.0
 [node name="Footsteps_audio_player" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_e36rl")
 bus = &"FootSteps"
+
+[node name="Player_UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_8g1tb")
+
+[node name="You_Won" type="RichTextLabel" parent="Player_UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 90.0
+offset_right = 96.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.02209, 0.986688)
+theme_override_colors/default_color = Color(0.905882, 0.776471, 0.223529, 1)
+bbcode_enabled = true
+text = "You succesully endured the horrors of the Forge and got the Main Character to destroy:  [color=#FF0000]T[/color][color=#F1000D]h[/color][color=#E4001A]e[/color] [color=#C90035]C[/color][color=#BB0043]u[/color][color=#AE0050]r[/color][color=#A1005D]s[/color][color=#93006B]e[/color][color=#860078]d[/color] [color=#6B0093]M[/color][color=#5D00A1]a[/color][color=#5000AE]g[/color][color=#4300BB]u[/color][color=#3500C9]f[/color][color=#2800D6]f[/color][color=#1A00E4]i[/color][color=#0D00F1]n[/color] ! 
+
+Congratulations and enjoy the rest of [color=red] GWJ#68"
+
+[node name="Label" type="Label" parent="Player_UI/You_Won"]
+layout_mode = 0
+offset_left = 615.408
+offset_top = 163.172
+offset_right = 776.408
+offset_bottom = 186.172
+text = "Insert QR codes here"
+
+[node name="PauseMenu" type="Control" parent="Player_UI"]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -75.0
+offset_right = 150.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_te7ic")
+script = ExtResource("4_rjgso")
+
+[node name="PanelContainer" type="PanelContainer" parent="Player_UI/PauseMenu"]
+layout_mode = 2
+offset_right = 300.0
+offset_bottom = 150.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Player_UI/PauseMenu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player_UI/PauseMenu/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="PauseButton" type="Button" parent="Player_UI/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="Player_UI/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="Player_UI/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="SettingsMenu" type="Control" parent="Player_UI/PauseMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 381.0
+offset_top = 18.0
+offset_right = 381.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.811358, 0.811358)
+theme = ExtResource("3_te7ic")
+
+[node name="PanelContainer" type="PanelContainer" parent="Player_UI/PauseMenu/SettingsMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -225.0
+offset_right = 200.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_waenv")
+
+[node name="MarginContainer" type="MarginContainer" parent="Player_UI/PauseMenu/SettingsMenu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 400
+
+[node name="TabContainer" type="TabContainer" parent="Player_UI/PauseMenu/SettingsMenu/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("3_te7ic")
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_sfkcl")
+tab_alignment = 1
+clip_tabs = false
+
+[node name="Audio" type="TabBar" parent="Player_UI/PauseMenu/SettingsMenu/PanelContainer/MarginContainer/TabContainer"]
+layout_mode = 2
+tab_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Player_UI/PauseMenu/SettingsMenu/PanelContainer/MarginContainer/TabContainer/Audio"]
+layout_mode = 2
+offset_right = 400.0
+offset_bottom = 450.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="AudioSettings" parent="Player_UI/PauseMenu/SettingsMenu/PanelContainer/MarginContainer/TabContainer/Audio/MarginContainer" instance=ExtResource("5_0g370")]
+layout_mode = 2
+
+[node name="Controls" type="TabBar" parent="Player_UI/PauseMenu/SettingsMenu/PanelContainer/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+tab_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Player_UI/PauseMenu/SettingsMenu/PanelContainer/MarginContainer/TabContainer/Controls"]
+layout_mode = 2
+offset_right = 400.0
+offset_bottom = 450.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="InputSettings" parent="Player_UI/PauseMenu/SettingsMenu/PanelContainer/MarginContainer/TabContainer/Controls/MarginContainer" instance=ExtResource("6_qclvu")]
+layout_mode = 2
+
+[node name="CharacterSelect" type="Control" parent="Player_UI"]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_8j5ip")
+
+[node name="BG" type="ColorRect" parent="Player_UI/CharacterSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_srcbl")
+color = Color(0.372549, 0.0588235, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Player_UI/CharacterSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player_UI/CharacterSelect/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_te7ic")
+theme_override_font_sizes/font_size = 32
+text = "Select your character"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+
+[node name="CharacterContainer" type="VBoxContainer" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="CharacterPreviewContainer" type="PanelContainer" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DescriptionBox" type="Panel" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/DescriptionBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="CaracterDescription" type="Label" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/DescriptionBox/MarginContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+horizontal_alignment = 3
+autowrap_mode = 2
+
+[node name="CharacterSelectionContainer" type="VBoxContainer" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="CharacterListContainer" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer" instance=ExtResource("7_jss1m")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator" type="HSeparator" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SelectButton" type="Button" parent="Player_UI/CharacterSelect/MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("3_te7ic")
+text = "Continue
+"
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.765674, 0.643229, 0, -0.643229, 0.765674, 0, 0, 0)
+collision_mask = 4
+spring_length = 6.0
+margin = 0.25
+
+[node name="Player_cam" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.987781, -0.155848, 0, 0.155848, 0.987781, 0, 0.00356889, 5.94806)
+
+[connection signal="pressed" from="Player_UI/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/PauseButton" to="Player_UI/PauseMenu" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="Player_UI/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/SettingsButton" to="Player_UI/PauseMenu" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Player_UI/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/QuitButton" to="Player_UI/PauseMenu" method="_on_quit_button_pressed"]
+
+[editable path="Player_UI/PauseMenu/SettingsMenu/PanelContainer/MarginContainer/TabContainer/Controls/MarginContainer/InputSettings"]
+[editable path="Player_UI/CharacterSelect/MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer/CharacterListContainer"]

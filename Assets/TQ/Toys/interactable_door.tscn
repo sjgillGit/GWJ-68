@@ -1,0 +1,110 @@
+[gd_scene load_steps=11 format=3 uid="uid://bjf4oio5wwrnl"]
+
+[ext_resource type="Material" uid="uid://d1g2dnqdtlim6" path="res://Assets/TQ/Shaders_Materials/Materials/Gravel_noise_txt.tres" id="1_7qwue"]
+[ext_resource type="Material" uid="uid://dpvdpugdhtek1" path="res://Assets/TQ/Shaders_Materials/Materials/Particle_Material.tres" id="2_rc8tn"]
+
+[sub_resource type="GDScript" id="GDScript_1tr2w"]
+resource_name = "Interactable_Door"
+script/source = "extends Node3D
+class_name TQ_Door
+##@experimental
+
+##will hopefully only open for the rodent character
+
+var interactable: bool = false
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	connect_sig()
+	pass # Replace with function body.
+
+func connect_sig():
+	$Interaction_Check_area.connect('body_entered', check_body)
+	pass
+
+
+func check_body(body):
+	
+	pass
+
+func _input(event):
+	if Input.is_action_just_pressed(\"Skill\"):
+		door_func(event)
+	pass
+
+func door_func(event):
+	if interactable == true:
+		queue_free()
+	
+	pass
+
+
+func _on_interaction_check_area_body_entered(body):
+	if body.is_in_group(\"Player\") and PlayerClassStats.class_id == 0:
+		interactable = true
+	else:
+		interactable = false
+	
+	print(interactable)
+	pass # Replace with function body.
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_pk7v8"]
+size = Vector3(7.95, 12, 0.28)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5ckvo"]
+data = PackedVector3Array(-3.975, 6, 0.14, 3.975, 6, 0.14, -3.975, -6, 0.14, 3.975, 6, 0.14, 3.975, -6, 0.14, -3.975, -6, 0.14, 3.975, 6, -0.14, -3.975, 6, -0.14, 3.975, -6, -0.14, -3.975, 6, -0.14, -3.975, -6, -0.14, 3.975, -6, -0.14, 3.975, 6, 0.14, 3.975, 6, -0.14, 3.975, -6, 0.14, 3.975, 6, -0.14, 3.975, -6, -0.14, 3.975, -6, 0.14, -3.975, 6, -0.14, -3.975, 6, 0.14, -3.975, -6, -0.14, -3.975, 6, 0.14, -3.975, -6, 0.14, -3.975, -6, -0.14, 3.975, 6, 0.14, -3.975, 6, 0.14, 3.975, 6, -0.14, -3.975, 6, 0.14, -3.975, 6, -0.14, 3.975, 6, -0.14, -3.975, -6, 0.14, 3.975, -6, 0.14, -3.975, -6, -0.14, 3.975, -6, 0.14, 3.975, -6, -0.14, -3.975, -6, -0.14)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_luxob"]
+size = Vector3(9.875, 10.425, 16.5)
+
+[sub_resource type="Gradient" id="Gradient_5oyrh"]
+offsets = PackedFloat32Array(0.462264, 1)
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2sbld"]
+gradient = SubResource("Gradient_5oyrh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_44uyh"]
+emission_shape = 3
+emission_box_extents = Vector3(3, 3, 3)
+angle_min = -90.0
+angle_max = 90.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.05
+color_ramp = SubResource("GradientTexture1D_2sbld")
+
+[sub_resource type="QuadMesh" id="QuadMesh_djv6m"]
+material = ExtResource("2_rc8tn")
+
+[node name="Interactable_Door" type="Node3D"]
+script = SubResource("GDScript_1tr2w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.88704, 0.435452)
+material_override = ExtResource("1_7qwue")
+mesh = SubResource("BoxMesh_pk7v8")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+collision_layer = 4
+collision_mask = 11
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_5ckvo")
+
+[node name="Interaction_Check_area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.84136, 0.375544)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interaction_Check_area"]
+shape = SubResource("BoxShape3D_luxob")
+
+[node name="SparklesFX" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.43595, 0)
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_44uyh")
+draw_pass_1 = SubResource("QuadMesh_djv6m")
+
+[connection signal="body_entered" from="Interaction_Check_area" to="." method="_on_interaction_check_area_body_entered"]
