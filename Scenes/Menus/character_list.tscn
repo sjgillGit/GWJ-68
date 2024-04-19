@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=3 uid="uid://carr70jm4uxjk"]
+
+[ext_resource type="Theme" uid="uid://c127lo03d7ash" path="res://Assets/new_theme.tres" id="1_30q8v"]
+[ext_resource type="PackedScene" uid="uid://b4dwd2ilknvic" path="res://Scenes/Menus/character_portrait.tscn" id="1_x3t0a"]
+[ext_resource type="Script" path="res://Scripts/UI/character_list.gd" id="2_pbfus"]
+[ext_resource type="Texture2D" uid="uid://d0ohel1jg23yx" path="res://Assets/TQ/textures/Crow_Icon.png" id="4_qmd8h"]
+[ext_resource type="Texture2D" uid="uid://dd7qmo2bvw70y" path="res://Assets/TQ/textures/Ink_icon.png" id="5_etffw"]
+[ext_resource type="Texture2D" uid="uid://2ti14ilxdxt3" path="res://Assets/TQ/textures/MC_Icon.png" id="6_dq8lw"]
+[ext_resource type="Texture2D" uid="uid://dwe68t2llp5uv" path="res://Assets/TQ/textures/Rodent_Icon.png" id="7_eo7vd"]
+[ext_resource type="Texture2D" uid="uid://bok88awx7hpvu" path="res://Assets/TQ/textures/Skate_icon.png" id="8_0jpcy"]
+
+[node name="CharacterListContainer" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -250.0
+offset_right = 84.5
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_30q8v")
+script = ExtResource("2_pbfus")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+scroll_deadzone = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="CharP0" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="CharacterImage" parent="MarginContainer/ScrollContainer/VBoxContainer/CharP0/MarginContainer/VBoxContainer" index="0"]
+texture = ExtResource("7_eo7vd")
+expand_mode = 4
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CharP1" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="CharacterImage" parent="MarginContainer/ScrollContainer/VBoxContainer/CharP1/MarginContainer/VBoxContainer" index="0"]
+texture = ExtResource("5_etffw")
+expand_mode = 4
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CharP2" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="CharacterImage" parent="MarginContainer/ScrollContainer/VBoxContainer/CharP2/MarginContainer/VBoxContainer" index="0"]
+texture = ExtResource("4_qmd8h")
+expand_mode = 4
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CharP3" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="CharacterImage" parent="MarginContainer/ScrollContainer/VBoxContainer/CharP3/MarginContainer/VBoxContainer" index="0"]
+texture = ExtResource("8_0jpcy")
+expand_mode = 4
+
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CharP4" parent="MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_x3t0a")]
+layout_mode = 2
+
+[node name="CharacterImage" parent="MarginContainer/ScrollContainer/VBoxContainer/CharP4/MarginContainer/VBoxContainer" index="0"]
+texture = ExtResource("6_dq8lw")
+expand_mode = 4
+
+[node name="HSeparator5" type="HSeparator" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[editable path="MarginContainer/ScrollContainer/VBoxContainer/CharP0"]
+[editable path="MarginContainer/ScrollContainer/VBoxContainer/CharP1"]
+[editable path="MarginContainer/ScrollContainer/VBoxContainer/CharP2"]
+[editable path="MarginContainer/ScrollContainer/VBoxContainer/CharP3"]
+[editable path="MarginContainer/ScrollContainer/VBoxContainer/CharP4"]

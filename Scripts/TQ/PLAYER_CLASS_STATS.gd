@@ -11,12 +11,14 @@ var class_id: int  ## set this in the PC before using
 
 var walk_speed: float
 var jump_velocity: float
+var alive: bool
 
 ## contains the varied stats of each class
 @onready var PLAYER_CLASS_STATS = { 
-	class_id : {
+	0 : {
 		walk_speed : 2.0,
-		jump_velocity : 7.0,
+		jump_velocity : 7.0, 
+		"alive" : false
 		},
 	
 	

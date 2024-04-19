@@ -1957,6 +1957,9 @@ mesh = SubResource("CapsuleMesh_55tif")
 [node name="The_Magical_Macguffin" parent="." instance=ExtResource("8_nypx6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 221.887, 2.02801, -54.8626)
 
+[node name="1" parent="The_Magical_Macguffin/Meshes" index="2"]
+transform = Transform3D(0.691324, 0.710629, 0.130682, -0.722546, 0.679922, 0.125035, 1.49012e-07, -0.180863, 0.983509, 0, 0.984151, 0)
+
 [node name="2" parent="The_Magical_Macguffin/Meshes" index="3"]
 transform = Transform3D(0.749641, -0.661843, 0.00090497, 0.661841, 0.74964, 0.00235367, -0.00223616, -0.00116546, 0.999997, 0, 0.984151, 0)
 
