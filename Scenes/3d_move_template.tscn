@@ -1,5 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://cov4p6bj4wqua"]
+[gd_scene load_steps=25 format=3 uid="uid://cov4p6bj4wqua"]
 
+[ext_resource type="PackedScene" uid="uid://ej4n0fxqou5e" path="res://Scenes/Menus/pause_screen.tscn" id="1_fh24c"]
 [ext_resource type="PackedScene" uid="uid://dm7ims2w6nn7q" path="res://Scenes/character_body_3d.tscn" id="1_ob18n"]
 [ext_resource type="Script" path="res://Scripts/area_enter.gd" id="3_bv0wr"]
 [ext_resource type="PackedScene" uid="uid://bp66ahbyddhoc" path="res://Scenes/camcorder.tscn" id="4_ayvgr"]
@@ -268,6 +269,8 @@ shape = SubResource("BoxShape3D_vdqg7")
 
 [node name="Camera3D" parent="AreaTransition3" instance=ExtResource("4_ayvgr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.12393, 3.34565, -5.44325)
+
+[node name="PauseScreen" parent="." instance=ExtResource("1_fh24c")]
 
 [connection signal="body_entered" from="Play_Area_1" to="Play_Area_1" method="_on_body_entered"]
 [connection signal="body_exited" from="Play_Area_1" to="Play_Area_1" method="_on_body_exited"]

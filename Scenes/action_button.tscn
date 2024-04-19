@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://w0kjvjd7ycqi"]
+[gd_scene load_steps=4 format=3 uid="uid://w0kjvjd7ycqi"]
 
-[ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="1_3d8q8"]
+[ext_resource type="Theme" uid="uid://c127lo03d7ash" path="res://Assets/new_theme.tres" id="1_3d8q8"]
 [ext_resource type="Script" path="res://Scripts/UI/ActionButton.gd" id="1_ujncf"]
+[ext_resource type="Script" path="res://Scripts/Saving/SavingComponent.gd" id="3_4lriq"]
 
 [node name="ActionButton" type="Button"]
 anchors_preset = 15
@@ -11,5 +12,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_3d8q8")
 script = ExtResource("1_ujncf")
+
+[node name="SavingComponent" type="Node" parent="."]
+script = ExtResource("3_4lriq")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

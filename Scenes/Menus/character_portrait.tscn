@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4dwd2ilknvic"]
+[gd_scene load_steps=5 format=3 uid="uid://b4dwd2ilknvic"]
 
-[ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="1_lgkf4"]
+[ext_resource type="Theme" uid="uid://c127lo03d7ash" path="res://Assets/new_theme.tres" id="1_lgkf4"]
 [ext_resource type="Texture2D" uid="uid://dj7aymc7bw88m" path="res://Assets/icon.svg" id="2_myfqw"]
+[ext_resource type="Script" path="res://Scripts/UI/character_portrait.gd" id="2_tn0gu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewdq2"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="CharacterPortrait" type="PanelContainer"]
+[node name="CharP0" type="PanelContainer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -20,6 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_lgkf4")
+script = ExtResource("2_tn0gu")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -44,3 +46,6 @@ horizontal_alignment = 1
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ewdq2")
+keep_pressed_outside = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,15 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://djfo1yrwnhb3f"]
+[gd_scene load_steps=8 format=3 uid="uid://djfo1yrwnhb3f"]
 
 [ext_resource type="PackedScene" uid="uid://carr70jm4uxjk" path="res://Scenes/Menus/character_list.tscn" id="1_0mc04"]
-[ext_resource type="Theme" uid="uid://c6lscnkcsidri" path="res://Assets/new_theme.tres" id="2_7mb60"]
+[ext_resource type="Script" path="res://Scripts/UI/character_select.gd" id="1_ff17t"]
+[ext_resource type="Theme" uid="uid://c127lo03d7ash" path="res://Assets/new_theme.tres" id="2_7mb60"]
+[ext_resource type="PackedScene" uid="uid://cx6evac6ewfex" path="res://Assets/Mike3D/Mr Thumper.glb" id="3_ctx5j"]
 
-[node name="Control" type="Control"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3rs5f"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_jyxog"]
+sky_material = SubResource("ProceduralSkyMaterial_3rs5f")
+
+[sub_resource type="Environment" id="Environment_ocoew"]
+background_mode = 2
+sky = SubResource("Sky_jyxog")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="CharacterSelect" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ff17t")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ocoew")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.953717, -0.271186, 0.129931, 0, 0.432086, 0.901833, -0.300706, -0.860093, 0.412087, 0, 0, 0)
+shadow_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -70,6 +93,42 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/CharacterPreviewContainer"]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/CharacterPreviewContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(758, 358)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/CharacterPreviewContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.567707, 1.21931)
+
+[node name="Mr Thumper" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/CharacterPreviewContainer/SubViewportContainer/SubViewport" instance=ExtResource("3_ctx5j")]
+
+[node name="Skeleton3D" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/CharacterPreviewContainer/SubViewportContainer/SubViewport/Mr Thumper/Armature" index="0"]
+bones/3/rotation = Quaternion(0.131373, -0.163077, -0.613433, 0.761477)
+bones/4/rotation = Quaternion(0.537895, 0.174772, -0.442202, 0.696118)
+bones/5/rotation = Quaternion(-0.00164085, 0.0229609, 0.0243803, 0.999438)
+bones/8/rotation = Quaternion(0.192807, 0.307461, 0.491426, 0.791703)
+bones/9/rotation = Quaternion(0.0315964, 0.118049, 0.217109, 0.968468)
+bones/10/rotation = Quaternion(0.302461, -0.495607, 0.447871, 0.679929)
+bones/11/rotation = Quaternion(0.0479969, 0.800015, 0.232417, 0.551049)
+bones/12/rotation = Quaternion(-0.0556031, -0.316858, 0.297789, 0.898794)
+bones/14/rotation = Quaternion(0.168371, 0, 4.01428e-08, 0.985724)
+bones/19/rotation = Quaternion(0.0109925, 0.203337, -0.365917, 0.908096)
+bones/21/rotation = Quaternion(-0.0212953, -0.0416585, -0.385154, 0.921666)
+bones/24/rotation = Quaternion(-0.129377, -4.02898e-08, -0.563945, 0.815615)
+bones/25/rotation = Quaternion(-0.178599, 0.0019661, -0.0527816, 0.982503)
+bones/27/rotation = Quaternion(0.0980843, -0.00566886, 0.270183, 0.957783)
+bones/32/rotation = Quaternion(0.478828, 2.79057e-08, 1.29382e-07, 0.877909)
+bones/33/rotation = Quaternion(0.267727, -0.0900984, 0.34781, 0.893998)
+bones/45/rotation = Quaternion(-0.959339, -0.129049, 0.0649513, 0.24248)
+bones/46/rotation = Quaternion(0.0822761, 0.0780732, 0.123332, 0.985862)
+bones/47/rotation = Quaternion(0.0790539, 0.0248528, 0.101486, 0.99138)
+bones/50/rotation = Quaternion(-0.778131, 0.0166948, 0.0134684, 0.627736)
+
 [node name="DescriptionBox" type="Panel" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
@@ -82,6 +141,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_7mb60")
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
@@ -109,3 +169,8 @@ layout_mode = 2
 theme = ExtResource("2_7mb60")
 text = "Select
 "
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+
+[editable path="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterContainer/CharacterPreviewContainer/SubViewportContainer/SubViewport/Mr Thumper"]
+[editable path="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/CharacterSelectionContainer/CharacterListContainer"]
