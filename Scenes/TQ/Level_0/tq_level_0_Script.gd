@@ -1,6 +1,7 @@
 extends Node3D
 class_name TQ_Level_0
 
+var user_prefs: UserPreferences
 
 @onready var Player = $PC
 
@@ -10,7 +11,7 @@ var Camera_array = []
 
 
 func _ready():
-	
+	user_prefs = UserPreferences.load_or_create()
 	set_current_player_cam() 
 	
 	pass

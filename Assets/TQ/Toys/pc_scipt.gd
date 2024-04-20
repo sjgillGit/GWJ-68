@@ -26,8 +26,6 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # End basics
 
-@export_enum("Rodent", "Ink_Blot", "Murder_Of_Crows", "Skater_Knight", "Main_Character") var class_id = 0
-
 
 
 func _ready():
@@ -95,7 +93,7 @@ func _physics_process(delta):
 func _input(event):
 	
 	if Input.is_action_just_pressed("Skill"):
-		match class_id:
+		match PlayerClassStats.class_id:
 			0:# Rodent
 				
 				
@@ -133,7 +131,7 @@ func generate_player_Mesh_and_anims():
 	var model_i = model_p
 	
 	
-	match class_id:
+	match PlayerClassStats.class_id:
 		0:
 			var pet_p = load("res://Assets/Mike3D/mouse.tscn")
 			var pet_i = pet_p.instantiate()
@@ -162,7 +160,7 @@ func generate_player_Mesh_and_anims():
 	
 	
 	
-	print(str(class_id))
+	print(str(PlayerClassStats.class_id))
 	# ENDBLOCK
 	
 	pass

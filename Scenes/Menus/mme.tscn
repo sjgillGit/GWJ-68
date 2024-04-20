@@ -1,73 +1,60 @@
-[gd_scene load_steps=20 format=3 uid="uid://b3mfo7m5s2j4h"]
+[gd_scene load_steps=14 format=3 uid="uid://b40lhj1c7wqvp"]
 
-[ext_resource type="Script" path="res://Scenes/TQ/Level_0/tq_level_0_Script.gd" id="1_erj5n"]
-[ext_resource type="MeshLibrary" uid="uid://dhkesqegkkevv" path="res://Assets/TQ/Models/MeshLibs/Floors_A.tres" id="1_hqene"]
-[ext_resource type="MeshLibrary" uid="uid://cvb07pqea1vpn" path="res://Assets/TQ/Models/MeshLibs/Wall_A.tres" id="2_kw71u"]
-[ext_resource type="Shader" path="res://Assets/TQ/Shaders_Materials/LavaTxt.gdshader" id="4_ej0l0"]
-[ext_resource type="AudioStream" uid="uid://dc7gp6bta4cds" path="res://Assets/Don/Lava Flowing Randomize_01_DW_SFX.wav" id="5_vdqie"]
-[ext_resource type="PackedScene" uid="uid://br77sib5i23l" path="res://Assets/TQ/Toys/the_peeping_tom.tscn" id="5_ya518"]
-[ext_resource type="PackedScene" uid="uid://cljkiwq1p2wby" path="res://Assets/TQ/Toys/pc.tscn" id="6_i7qnb"]
-[ext_resource type="PackedScene" uid="uid://fowsuu26rc46" path="res://Assets/TQ/Toys/the_magical_macguffin.tscn" id="8_x85au"]
-[ext_resource type="PackedScene" uid="uid://ej4n0fxqou5e" path="res://Scenes/Menus/pause_screen.tscn" id="9_cxcby"]
+[ext_resource type="MeshLibrary" uid="uid://dhkesqegkkevv" path="res://Assets/TQ/Models/MeshLibs/Floors_A.tres" id="1_4012o"]
+[ext_resource type="MeshLibrary" uid="uid://cvb07pqea1vpn" path="res://Assets/TQ/Models/MeshLibs/Wall_A.tres" id="2_1o1pw"]
+[ext_resource type="Shader" path="res://Assets/TQ/Shaders_Materials/LavaTxt.gdshader" id="3_4mqu1"]
+[ext_resource type="AudioStream" uid="uid://dc7gp6bta4cds" path="res://Assets/Don/Lava Flowing Randomize_01_DW_SFX.wav" id="4_f24xw"]
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_n6r34"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_ocqx6"]
 
-[sub_resource type="Gradient" id="Gradient_vm34m"]
+[sub_resource type="Gradient" id="Gradient_ka84w"]
 offsets = PackedFloat32Array(0.286885, 0.655738, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.893593, 0.327252, 0.204622, 1, 0.639186, 0.0103139, 0.355816, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_cmijk"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v0jfv"]
 frequency = 0.035
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h1q12"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pwlie"]
 seamless = true
-color_ramp = SubResource("Gradient_vm34m")
-noise = SubResource("FastNoiseLite_cmijk")
+color_ramp = SubResource("Gradient_ka84w")
+noise = SubResource("FastNoiseLite_v0jfv")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rm2b6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h185p"]
 render_priority = 0
-shader = ExtResource("4_ej0l0")
+shader = ExtResource("3_4mqu1")
 shader_parameter/custom_color = Color(1, 1, 1, 1)
 shader_parameter/direction_and_speed = Vector2(0.02, 0)
 shader_parameter/scale = Vector2(1, 1)
 shader_parameter/flip = false
-shader_parameter/albedo = SubResource("NoiseTexture2D_h1q12")
+shader_parameter/albedo = SubResource("NoiseTexture2D_pwlie")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_0fi8t"]
-material = SubResource("ShaderMaterial_rm2b6")
+[sub_resource type="PlaneMesh" id="PlaneMesh_eq7qf"]
+material = SubResource("ShaderMaterial_h185p")
 size = Vector2(300, 300)
 
-[sub_resource type="Curve3D" id="Curve3D_jmdp5"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.19229, 0, -25.0879, 0, 0, 0, 0, 0, 0, 1.4344, 0, -54.6253, 0, 0, 0, 0, 0, 0, 0.892662, 0, -88.1645, 0, 0, 0, 0, 0, 0, 1.86111, 0, -123.028),
-"tilts": PackedFloat32Array(0, 0, 0, 0)
-}
-point_count = 4
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hje86"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s2ydd"]
 sky_top_color = Color(0, 0, 0, 1)
 sky_horizon_color = Color(1, 0.447059, 0.560784, 1)
 ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0.458824, 0, 0.0823529, 1)
 
-[sub_resource type="Sky" id="Sky_f6ux1"]
-sky_material = SubResource("ProceduralSkyMaterial_hje86")
+[sub_resource type="Sky" id="Sky_nwuku"]
+sky_material = SubResource("ProceduralSkyMaterial_s2ydd")
 
-[sub_resource type="Environment" id="Environment_7jav3"]
+[sub_resource type="Environment" id="Environment_sytd8"]
 background_mode = 2
-sky = SubResource("Sky_f6ux1")
+sky = SubResource("Sky_nwuku")
 ambient_light_source = 2
 
-[node name="TQ_Level_0" type="Node3D"]
-script = ExtResource("1_erj5n")
+[node name="MME" type="Node3D"]
 
 [node name="Geometry" type="Node" parent="."]
 
 [node name="Navigation_region" type="NavigationRegion3D" parent="Geometry"]
-navigation_mesh = SubResource("NavigationMesh_n6r34")
+navigation_mesh = SubResource("NavigationMesh_ocqx6")
 
 [node name="Floors" type="GridMap" parent="Geometry/Navigation_region"]
-mesh_library = ExtResource("1_hqene")
+mesh_library = ExtResource("1_4012o")
 cell_size = Vector3(12, 24, 12)
 cell_center_y = false
 collision_layer = 4
@@ -77,7 +64,7 @@ data = {
 }
 
 [node name="Exterior_Walls" type="GridMap" parent="Geometry/Navigation_region"]
-mesh_library = ExtResource("2_kw71u")
+mesh_library = ExtResource("2_1o1pw")
 cell_size = Vector3(12, 12, 12)
 cell_center_y = false
 collision_layer = 4
@@ -88,7 +75,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Interior_Walls" type="GridMap" parent="Geometry/Navigation_region"]
-mesh_library = ExtResource("2_kw71u")
+mesh_library = ExtResource("2_1o1pw")
 cell_size = Vector3(12, 24, 12)
 cell_center_y = false
 collision_layer = 4
@@ -96,34 +83,12 @@ collision_mask = 11
 
 [node name="Lava_Floor" type="MeshInstance3D" parent="Geometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.32581, -100.58)
-mesh = SubResource("PlaneMesh_0fi8t")
-
-[node name="Camera" type="Node" parent="."]
-
-[node name="Cameras" type="Node" parent="Camera"]
-
-[node name="Cam_0" type="Camera3D" parent="Camera/Cameras"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8379, 10.7295, 116.316)
-
-[node name="ThePeepingTom" parent="Camera/Cameras" instance=ExtResource("5_ya518")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8198, 1.35457, 120.389)
-
-[node name="ThePeepingTom" parent="Camera/Cameras/ThePeepingTom" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.34005, 0)
-
-[node name="Paths" type="Node" parent="Camera"]
-
-[node name="CamPath_A" type="Path3D" parent="Camera/Paths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7988, 9.65469, 141.637)
-curve = SubResource("Curve3D_jmdp5")
-
-[node name="Cam_position" type="PathFollow3D" parent="Camera/Paths/CamPath_A"]
-transform = Transform3D(0.999964, 0, -0.00819643, 0, 1, 0, 0.00819643, 0, 0.999964, 1.19229, 0, -25.0879)
+mesh = SubResource("PlaneMesh_eq7qf")
 
 [node name="Lighting" type="Node" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
-environment = SubResource("Environment_7jav3")
+environment = SubResource("Environment_sytd8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.959908, 0.177504, 0.216953, -0.279626, 0.552105, 0.785487, 0.0196465, -0.814661, 0.579605, 0, 35.9601, 0)
@@ -133,21 +98,5 @@ shadow_enabled = true
 [node name="Audio" type="Node" parent="."]
 
 [node name="AmbientLava" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("5_vdqie")
+stream = ExtResource("4_f24xw")
 autoplay = true
-
-[node name="PC" parent="." instance=ExtResource("6_i7qnb")]
-transform = Transform3D(0.993069, -0.0076872, 0.117282, 0, 0.997859, 0.0654042, -0.117534, -0.0649509, 0.990943, 20.4439, 2.24128, 113.568)
-collision_mask = 14
-DEV_MODE = true
-
-[node name="The_Magical_Macguffin" parent="." instance=ExtResource("8_x85au")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7779, 2.02801, -245.786)
-
-[node name="2" parent="The_Magical_Macguffin/Meshes" index="3"]
-transform = Transform3D(0.749641, -0.661843, 0.00090497, 0.661841, 0.74964, 0.00235367, -0.00223616, -0.00116546, 0.999997, 0, 0.984151, 0)
-
-[node name="PauseScreen" parent="." instance=ExtResource("9_cxcby")]
-
-[editable path="Camera/Cameras/ThePeepingTom"]
-[editable path="The_Magical_Macguffin"]

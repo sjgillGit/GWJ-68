@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bc857vsq0elgh"]
+[gd_scene load_steps=7 format=3 uid="uid://bc857vsq0elgh"]
 
 [ext_resource type="Theme" uid="uid://c127lo03d7ash" path="res://Assets/new_theme.tres" id="1_q4o7q"]
 [ext_resource type="Script" path="res://Scripts/UI/settings_panel_container.gd" id="1_qmimg"]
 [ext_resource type="Script" path="res://Scripts/UI/Audio.gd" id="2_56540"]
-[ext_resource type="Script" path="res://Scripts/Saving/SavingComponent.gd" id="4_0k8ch"]
 [ext_resource type="Script" path="res://Scripts/UI/Video.gd" id="5_l4hci"]
 [ext_resource type="PackedScene" uid="uid://w0kjvjd7ycqi" path="res://Scenes/action_button.tscn" id="6_k7ct2"]
 
@@ -73,6 +72,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="MasterHSlider" type="HSlider" parent="Settings/Audio/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
 max_value = 1.0
@@ -80,6 +80,7 @@ step = 0.05
 value = 1.0
 
 [node name="MusicHSlider" type="HSlider" parent="Settings/Audio/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
 max_value = 1.0
@@ -87,6 +88,7 @@ step = 0.05
 value = 1.0
 
 [node name="SFXHSlider" type="HSlider" parent="Settings/Audio/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
 max_value = 1.0
@@ -107,12 +109,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[node name="SavingComponent" type="Node" parent="Settings/Audio"]
-script = ExtResource("4_0k8ch")
-properties_to_save = Array[String](["master_volume", "music_volume", "sfx_volume"])
-
 [node name="Video" type="TabBar" parent="Settings"]
-visible = false
 layout_mode = 2
 theme = ExtResource("1_q4o7q")
 script = ExtResource("5_l4hci")
@@ -187,12 +184,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[node name="SavingComponent" type="Node" parent="Settings/Video"]
-script = ExtResource("4_0k8ch")
-properties_to_save = Array[String](["window_mode", "vsync"])
-
 [node name="Controls" type="TabBar" parent="Settings"]
-visible = false
 layout_mode = 2
 theme = ExtResource("1_q4o7q")
 
@@ -267,26 +259,19 @@ layout_mode = 2
 size_flags_vertical = 7
 action = "move_jump"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Settings/Controls"]
+[node name="BackButton" type="Button" parent="Settings/Controls"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.9
 anchor_right = 0.5
 anchor_bottom = 0.9
-offset_left = -53.0
-offset_top = -40.0
-offset_right = 53.0
+offset_left = -21.0
+offset_top = -32.0
+offset_right = 21.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="BackButton" type="Button" parent="Settings/Controls/HBoxContainer2"]
-layout_mode = 2
 text = "Back"
-
-[node name="DefaultButton" type="Button" parent="Settings/Controls/HBoxContainer2"]
-layout_mode = 2
-text = "Default"
 
 [connection signal="value_changed" from="Settings/Audio/HBoxContainer/VBoxContainer2/MasterHSlider" to="Settings/Audio" method="_on_master_h_slider_value_changed"]
 [connection signal="value_changed" from="Settings/Audio/HBoxContainer/VBoxContainer2/MusicHSlider" to="Settings/Audio" method="_on_music_h_slider_value_changed"]
@@ -296,5 +281,4 @@ text = "Default"
 [connection signal="toggled" from="Settings/Video/HBoxContainer/VBoxContainer2/BorderlessCheckBox" to="Settings/Video" method="_on_borderless_check_box_2_toggled"]
 [connection signal="item_selected" from="Settings/Video/HBoxContainer/VBoxContainer2/VSyncButton" to="Settings/Video" method="_on_v_sync_button_item_selected"]
 [connection signal="pressed" from="Settings/Video/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="Settings/Controls/HBoxContainer2/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="Settings/Controls/HBoxContainer2/DefaultButton" to="Settings/Controls/HBoxContainer/VBoxContainer2/ActionButton" method="_on_default_button_pressed"]
+[connection signal="pressed" from="Settings/Controls/BackButton" to="." method="_on_back_button_pressed"]

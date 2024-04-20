@@ -1,5 +1,10 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://b21eockt06mjx"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b21eockt06mjx"]
+
+[ext_resource type="FontFile" uid="uid://by6ohp3k752qm" path="res://Assets/TQ/textures/Fonts/SortsMillGoudy-Regular.ttf" id="1_udkpd"]
 
 [resource]
-font_size = 62
-font_color = Color(0, 0, 0, 1)
+font = ExtResource("1_udkpd")
+font_size = 54
+shadow_size = 10
+shadow_color = Color(0.08, 0, 0.00533333, 0.498039)
+shadow_offset = Vector2(-0.945, 4.115)

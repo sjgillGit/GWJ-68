@@ -18,10 +18,24 @@ var alive: bool
 	0 : {
 		walk_speed : 2.0,
 		jump_velocity : 7.0, 
-		"alive" : false
+		"alive" : true
 		},
 	
+	1 : {
+		"alive" : true
+	},
 	
+	2 : {
+		"alive" : true
+	},
+	
+	3 : {
+		"alive" : true
+	},
+	
+	4 : {
+		"alive" : true
+	}
 	
 }
 

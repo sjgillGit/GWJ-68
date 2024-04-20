@@ -1,9 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://chtvgyugi6onh"]
+[gd_scene load_steps=10 format=3 uid="uid://chtvgyugi6onh"]
 
-[ext_resource type="Texture2D" uid="uid://dlmqmynnd4jtg" path="res://Assets/TitleCAAARD_TEST_B.png" id="1_4r4wi"]
 [ext_resource type="Script" path="res://Main/MainMenu.gd" id="1_aqhaj"]
 [ext_resource type="Theme" uid="uid://c127lo03d7ash" path="res://Assets/new_theme.tres" id="3_6wwhn"]
+[ext_resource type="PackedScene" uid="uid://b40lhj1c7wqvp" path="res://Scenes/Menus/mme.tscn" id="3_8fk58"]
+[ext_resource type="PackedScene" uid="uid://fowsuu26rc46" path="res://Assets/TQ/Toys/the_magical_macguffin.tscn" id="3_156wx"]
 [ext_resource type="PackedScene" uid="uid://bc857vsq0elgh" path="res://Scenes/Menus/settings_panel_container.tscn" id="4_pvg4t"]
+[ext_resource type="Script" path="res://Scripts/Saving/SavingComponent.gd" id="5_xcxbd"]
+[ext_resource type="LabelSettings" uid="uid://b21eockt06mjx" path="res://Assets/TQ/textures/Fonts/new_label_settings.tres" id="6_4xhk3"]
+
+[sub_resource type="Gradient" id="Gradient_xddta"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.526316, 0.75188, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0.203962, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vbu12"]
+gradient = SubResource("Gradient_xddta")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,20 +26,49 @@ script = ExtResource("1_aqhaj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.997, 4.926, 82.318)
+fov = 65.0
+
+[node name="The_Magical_Macguffin" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("3_156wx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9665, 4.28548, 66.0026)
+
+[node name="MME" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("3_8fk58")]
+
+[node name="GradientTextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_vbu12")
+
 [node name="SettingsPanelContainer" parent="CanvasLayer" instance=ExtResource("4_pvg4t")]
 visible = false
 
-[node name="MenuButtonContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="MenuButtonContainer" type="VBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
 anchors_preset = -1
-anchor_left = 0.55
-anchor_top = 0.792
-anchor_right = 0.8
+anchor_left = 0.87
+anchor_top = 0.8
+anchor_right = 0.87
 anchor_bottom = 0.8
-offset_left = -85.0
-offset_top = -32.0
-offset_right = 85.0
-grow_horizontal = 2
+offset_left = -155.0
+offset_top = -104.0
+grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -33,12 +76,7 @@ theme = ExtResource("3_6wwhn")
 
 [node name="StartButton" type="Button" parent="CanvasLayer/MenuButtonContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
 text = "Start"
-
-[node name="Spacer" type="Control" parent="CanvasLayer/MenuButtonContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer/MenuButtonContainer"]
 layout_mode = 2
@@ -49,13 +87,25 @@ layout_mode = 2
 text = "Quit
 "
 
-[node name="BG" type="Sprite2D" parent="."]
-position = Vector2(575, 323)
-scale = Vector2(0.315, 0.315)
-texture = ExtResource("1_4r4wi")
+[node name="TitleLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.05
+anchor_right = 0.5
+anchor_bottom = 0.05
+offset_left = -259.5
+offset_right = 259.5
+offset_bottom = 78.0
+grow_horizontal = 2
+text = "The Cursed Macguffin"
+label_settings = ExtResource("6_4xhk3")
+horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(571, 324)
+
+[node name="SavingComponent" type="Node" parent="."]
+script = ExtResource("5_xcxbd")
 
 [connection signal="pressed" from="CanvasLayer/MenuButtonContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuButtonContainer/SettingsButton" to="." method="_on_settings_button_pressed"]

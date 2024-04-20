@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0ptuwvgrurm5"]
+[gd_scene load_steps=6 format=3 uid="uid://c0ptuwvgrurm5"]
+
+[ext_resource type="Texture2D" uid="uid://dlmqmynnd4jtg" path="res://Assets/TitleCAAARD_TEST_B.png" id="1_82uqe"]
+[ext_resource type="Theme" uid="uid://c127lo03d7ash" path="res://Assets/new_theme.tres" id="2_nnylw"]
 
 [sub_resource type="GDScript" id="GDScript_1nir2"]
 script/source = "extends Control
@@ -10,6 +13,17 @@ func _ready():
 	get_tree().change_scene_to_packed(MNP)
 "
 
+[sub_resource type="Gradient" id="Gradient_r5lmd"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.255639, 0.503759, 0.75188, 0.984962)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.19403, 0, 0, 0, 1, 0, 0, 0, 0.265625, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vtnty"]
+gradient = SubResource("Gradient_r5lmd")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
 [node name="Loading" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -19,17 +33,44 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_1nir2")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BGTextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -337.0
+offset_right = -5.0
+offset_bottom = 167.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_82uqe")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_vtnty")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -37.5
-offset_top = -11.5
-offset_right = 37.5
-offset_bottom = 11.5
+offset_left = -68.5
+offset_top = -23.5
+offset_right = 68.5
+offset_bottom = 23.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_nnylw")
+theme_override_font_sizes/font_size = 32
 text = "Loading..."
+horizontal_alignment = 1
+vertical_alignment = 1

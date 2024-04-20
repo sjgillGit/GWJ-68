@@ -18,7 +18,6 @@ config/icon="res://Assets/icon.svg"
 
 [autoload]
 
-ConfigFileHandler="*res://Scripts/Utils/ConfigFileHandler.gd"
 SavingManager="*res://Scripts/Saving/SavingManager.gd"
 JsonHelper="*res://Scripts/Utils/JsonHelper.gd"
 PlayerClassStats="*res://Scripts/TQ/PLAYER_CLASS_STATS.gd"

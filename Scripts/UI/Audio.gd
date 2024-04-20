@@ -1,38 +1,42 @@
 extends TabBar
 
-var master_volume: float
-var music_volume: float
-var sfx_volume: float
+@onready var MASTER_BUS_ID = AudioServer.get_bus_index("Master")
+@onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
+@onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 
-@onready var master_h_slider = $HBoxContainer/VBoxContainer2/MasterHSlider
-@onready var music_h_slider = $HBoxContainer/VBoxContainer2/MusicHSlider
-@onready var sfxh_slider = $HBoxContainer/VBoxContainer2/SFXHSlider
+@onready var master_h_slider = %MasterHSlider
+@onready var music_h_slider = %MusicHSlider
+@onready var sfxh_slider = %SFXHSlider
+
+var user_prefs: UserPreferences
 
 func _ready():
 	grab_click_focus()
-	SavingManager.load_data()
-	set_volume(0,master_volume)
-	set_volume(1,music_volume)
-	set_volume(2,sfx_volume)
-	master_h_slider.value = master_volume
-	music_h_slider.value = music_volume
-	sfxh_slider.value = sfx_volume
+	
+	user_prefs = UserPreferences.load_or_create()
+	if master_h_slider:
+		master_h_slider.value = user_prefs.master_volume
+	if music_h_slider:
+		music_h_slider.value = user_prefs.music_volume
+	if sfxh_slider:
+		sfxh_slider.value = user_prefs.sfx_volume
 
 
 func _on_master_h_slider_value_changed(value):
-	set_volume(0,value)
-	master_volume = value
-	SavingManager.save_data()
+	AudioServer.set_bus_volume_db(MASTER_BUS_ID, linear_to_db(value))
+	if user_prefs:
+		user_prefs.master_volume = value
+		user_prefs.save()
 
 func _on_music_h_slider_value_changed(value):
-	set_volume(1,value)
-	music_volume = value
-	SavingManager.save_data()
-	
+	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value))
+	if user_prefs:
+		user_prefs.music_volume = value
+		user_prefs.save()
+		
 func _on_sfxh_slider_value_changed(value):
-	set_volume(2,value)
-	sfx_volume = value
-	SavingManager.save_data()
+	AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(value))
+	if user_prefs:
+		user_prefs.sfx_volume = value
+		user_prefs.save()
 
-func set_volume(idx,value):
-	AudioServer.set_bus_volume_db(idx,linear_to_db(value))

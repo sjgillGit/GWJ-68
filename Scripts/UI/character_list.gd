@@ -5,13 +5,12 @@ var current_character: int
 
 
 func _ready():
+	#SavingManager.load_data()
 	for child in $MarginContainer/ScrollContainer/VBoxContainer.get_children():
 		if child.get_node_or_null("Button") != null:
 			child.get_node_or_null("Button").connect("pressed", test)
 			
-	
 	character_select()
-	print(str(character_count))
 
 func _process(delta):
 	pass
@@ -30,26 +29,25 @@ func character_select():
 				"CharP1":
 					PlayerClassStats.class_id = 1
 					PlayerClassStats.PLAYER_CLASS_STATS[PlayerClassStats.class_id]["alive"] = true
-					print("rodent_id")
+					
 					
 				"CharP2":
 					PlayerClassStats.class_id = 2
 					PlayerClassStats.PLAYER_CLASS_STATS[PlayerClassStats.class_id]["alive"] = true
-					print("rodent_id")
+					
 					
 				"CharP3":
 					PlayerClassStats.class_id = 3
 					PlayerClassStats.PLAYER_CLASS_STATS[PlayerClassStats.class_id]["alive"] = true
-					print("rodent_id")
+					
 					
 				"CharP4":
 					PlayerClassStats.class_id = 4
 					PlayerClassStats.PLAYER_CLASS_STATS[PlayerClassStats.class_id]["alive"] = true
-					print("rodent_id")
+					
 				
 	
-	
+
 func test():
 	pass
-	print("test passed")
 
