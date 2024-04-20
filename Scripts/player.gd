@@ -9,7 +9,7 @@ var acceleration: float = 2.00
 var deceleration: float = 1.25
 
 const SPRINT_MOD: float = 2.0
-const JUMP_VELOCITY: float = 4.5
+const JUMP_VELOCITY: float = 6
 const FORCE_MULTIPLIER: float = 0.001
 
 var final_speed: float = SPEED
@@ -33,11 +33,12 @@ func handle_jump_input():
 		velocity.y = JUMP_VELOCITY
 		
 func calculate_final_direction(camera):
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down") \
+		if is_on_floor() else Vector2.ZERO
 	var input_flat = Vector3(input_dir.x, 0, input_dir.y)
 	var input_flatter = Vector2(input_dir.x, input_dir.y)
 	
-	if camera != null || camera.is_player_movement_adjusted:
+	if camera != null && camera.is_player_movement_adjusted:
 		var camera_vector_flat: Vector3 = camera.get_global_transform().basis.x
 		var camera_vector_flatter = Vector2(camera_vector_flat.x, camera_vector_flat.z)
 		var camera_angle_rads_2 = Vector2(1,0).angle_to(camera_vector_flatter)
@@ -57,13 +58,16 @@ func modify_speed_for_sprint():
 	return final_speed
 	
 func apply_movement(_delta: float, direction, speed: float):
-	if direction:
+	if direction.length() > 0:
 		velocity.x = move_toward(velocity.x, direction.x * speed, acceleration)
 		velocity.z = move_toward(velocity.z, direction.z * speed, acceleration)
 	else:
-		velocity.x = move_toward(velocity.x, 0, deceleration)
-		velocity.z = move_toward(velocity.z, 0, deceleration)
-		
+		velocity.x = move_toward(velocity.x, 0, get_deacceleration())
+		velocity.z = move_toward(velocity.z, 0, get_deacceleration())
+
+func get_deacceleration() -> float:
+	return deceleration if is_on_floor() else 0
+	
 func collide_with_rigidbodies_godot4_fix():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
